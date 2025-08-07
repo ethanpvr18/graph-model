@@ -1,21 +1,29 @@
 import "./Graph.js";
 import { state, model } from "./state.js"
 
-function select(element, selectedElement) {
-    if(selectedElement) {
-        element = vertex;
+function select(type, element) {
+    if(type === 'vertex') {
+        state.selectedVertex = element;
         element.style.border = "3px solid red";
+    } else if(type === 'edge') {
+        state.selectedEdge = element;
+        element.style.border = "3px solid red";
+    }    
+}
+
+function deselect(type, element) {
+    if(element) {
+        if(type === 'vertex') {
+            state.selectedVertex = null;
+            element.style.border = "none";
+        } else if(type === 'edge') {
+            state.selectedEdge = null;
+            element.style.border = "none";
+        }
     }
 }
 
-function deselect(element, selectedElement) {
-    if(selectedElement) {
-        element.style.border = 'none';
-        element = null;
-    }
-}
-
-function createVertex(label) {
+function createVertex(label, event) {
     const vertex = document.createElement('div');
     vertex.classList.add('vertex');
     vertex.textContent = label;
@@ -27,7 +35,7 @@ function createVertex(label) {
 
     model.appendChild(vertex);
 
-    state.edges.push({ vertex, label  });
+    state.vertices.push(vertex);
 }
 
 function deleteVertex() {
@@ -133,9 +141,12 @@ function deleteEdge() {
 }
 
 function modifyEdge() {
-    if(model.contains(state.selectedEdge)) {
-        state.selectedEdge.textContent = state.selectedEditor.value;
-        state.selectedEdge.style.border = 'none';
+    if(state.selectedEdge) {
+        const edgeToModify = state.edges.find(e => e.edge === state.selectedEdge);
+        
+        if(edgeToModify) {
+            edgeToModify.label.textContent = state.selectedEditor.value;
+        }
     }
 
     state.selectedEdge = null;
@@ -148,7 +159,7 @@ function modifyEdge() {
     state.isEditing = false;
 }
 
-function createEditor(existingContent, leftPosition, rightPosition) {
+function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor = document.createElement('input');
     state.selectedEditor.type = 'text';
     state.selectedEditor.classList.add('editor');
@@ -158,7 +169,7 @@ function createEditor(existingContent, leftPosition, rightPosition) {
     const vertexRect = state.selectedVertex.getBoundingClientRect();
 
     state.selectedEditor.style.left = leftPosition;
-    state.selectedEditor.style.top =  rightPosition;
+    state.selectedEditor.style.top =  topPosition;
 
     model.appendChild(state.selectedEditor);
 }
@@ -174,82 +185,44 @@ function deleteEditor() {
 }
 
 function saveGraph() {
-    const edgeData = {
-        left : '',
-        top : '',
-        width : '',
-        transform : '',
-        rotate : '',
-        label : '',
-        sourceVertex : '',
-        sinkVertex : ''
-    };
+    const edgesData = [];
+    const edgeLabelsData = [];
+    const verticesData = [];
 
-    const edgeLabelData = {
-        left : '',
-        top : '',
-        label : ''
-    };
-
-    const vertexData = {
-        left : '',
-        top : '',
-        label : ''
-    };
-
-
-    const savedEdges = document.querySelectorAll('.edge');
-    const savedEdgeLabels = document.querySelectorAll('.vertex');
-    const savedVertices = document.querySelectorAll('.edge-label');
-
-
-    savedEdges.forEach((div) => {
-        edgeData.left = div.style.left;
-        edgeData.top = div.style.top;
-        edgeData.width = div.style.width;
-        edgeData.transform = div.style.transform;
-        edgeData.rotate = div.style.rotate;
-
-        console.log('Left = ' + edgeData.left + 
-            '\nTop = ' + edgeData.top + 
-            '\nWidth = ' + edgeData.width + 
-            '\nTransform= ' + edgeData.left + 
-            '\nRotate = ' + edgeData.left +
-            '\n\n');
+    document.querySelectorAll('.edge').forEach((div) => {
+        edgesData.push({
+            left: div.style.left,
+            top: div.style.top,
+            width: div.style.width,
+            transform: div.style.transform
+        });
     });
 
-    savedEdgeLabels.forEach((div) => {
-        edgeLabelData.left = div.style.left;
-        edgeLabelData.top = div.style.top;
-        edgeLabelData.label = div.innerHTML;
-
-        console.log('Left = ' + edgeLabelData.left + 
-            '\nTop = ' + edgeLabelData.top + 
-            '\nLabel = ' + edgeLabelData.label +
-            '\n\n');
+    document.querySelectorAll('.edge-label').forEach((div) => {
+        edgeLabelsData.push({
+            left: div.style.left,
+            top: div.style.top,
+            label: div.textContent
+        });
     });
 
-    savedVertices.forEach((div) => {
-        vertexData.left = div.style.left;
-        vertexData.top = div.style.top;
-        vertexData.label = div.innerHTML;
-
-        console.log('Left = ' + vertexData.left + 
-            '\nTop = ' + vertexData.top + 
-            '\nLabel = ' + vertexData.label +
-            '\n\n');
+    document.querySelectorAll('.vertex').forEach((div) => {
+        verticesData.push({
+            left: div.style.left,
+            top: div.style.top,
+            label: div.textContent
+        });
     });
 
-    const edgeDataString = JSON.stringify(edgeData);
-    const edgeLabelDataString = JSON.stringify(edgeLabelData);
-    const vertexDataString = JSON.stringify(vertexData);
+    const data = { edges: edgesData, edgeLabels: edgeLabelsData, vertices: verticesData};
+    const dataString = JSON.stringify(data, null, 2);
 
-    const blob = new Blob([edgeDataString], { type: 'application/json'});
+    const blob = new Blob([dataString], { type: 'application/json'});
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'data.json';
+    a.download = 'graph.json';
     document.body.appendChild(a);
     
     a.click();

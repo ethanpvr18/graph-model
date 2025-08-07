@@ -6,11 +6,11 @@ document.addEventListener('click', (event) => {
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
         state.isEditing = false;
         if(state.selectedVertex) {
-            deselect(vertex, state.selectedVertex);
+            deselect('vertex', state.selectedVertex);
         } else if(state.selectedEdge) {
-            deselect(edge, state.selectedEdge);
+            deselect('edge', state.selectedEdge);
         } else if(state.selectedEditor) {
-            deleteEditor(state.selectedEditor, state.isEditing)
+            deleteEditor();
         }
     }
 });
@@ -20,50 +20,57 @@ document.addEventListener('dblclick', (event) => {
 
     // Create Vertex
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor') && state.isEditing) {
-        createVertex(`v${state.vertexNumber++}`);
+        createVertex(`v${state.vertexNumber++}`, event);
 
     } else if(event.target.classList.contains('vertex') && state.isEditing) {
         // Select Vertex
         const vertex = event.target;
+        const modelRect = model.getBoundingClientRect();
+        const vertexRect = vertex.getBoundingClientRect();
+
         if (!state.selectedVertex) {
             // Select Vertex 1
-            select(vertex, state.selectedVertex);
+            select('vertex', vertex);
 
             // Open Editor
-            createEditor(state.selectedVertex.textContent, (modelRect.left + vertexRect.left + 27) + 'px', (modelRect.top + vertexRect.top - 5) + 'px');
+            createEditor(vertex.textContent, 
+                            (vertexRect.left - modelRect.left + 27) + 'px',
+                            (vertexRect.top - modelRect.top - 5) + 'px');
 
         } else if((state.selectedVertex !== vertex) && state.isEditing){
             // Create Edge
             createEdge(state.selectedVertex, vertex, `e${state.edgeNumber++}`);
 
             // Select Vertex 2
-            deselect(vertex, state.selectedVertex);
+            deselect('vertex', state.selectedVertex);
             
             // Close and Open Editor
-            deleteEditor(state.selectedEditor, state.isEditing)
+            deleteEditor();
         } else {
             // Deselect Vertex
-            deselect(vertex, state.selectedVertex);
+            deselect('vertex', state.selectedVertex);
             
             // Close Editor
-            deleteEditor(state.selectedEditor, state.isEditing)
+            deleteEditor();
         }
     } else if(event.target.classList.contains('edge') && state.isEditing) {
         // Select Edge
         const edge = event.target;
         if(!state.selectedEdge) {
             // Select Edge
-            select(edge, state.selectedEdge);
+            select('edge', edge);
 
             // Open Editor
-            createEditor(state.selectedEdge.textContent, (parseInt(state.selectedEdge.style.left) + 27) + 'px', (parseInt(state.selectedEdge.style.top) - 5) + 'px');
+            createEditor(state.selectedEdge.textContent, 
+                        (parseInt(state.selectedEdge.style.left) + 27) + 'px',
+                        (parseInt(state.selectedEdge.style.top) - 5) + 'px');
 
         } else {
             // Deselect Edge
-            deselect(edge, state.selectedEdge);
+            deselect('edge', state.selectedEdge);
 
             // Close Editor
-            deleteEditor(state.selectedEditor, state.isEditing)
+            deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
         // Select Editor
@@ -80,9 +87,12 @@ document.addEventListener('dblclick', (event) => {
 
 document.addEventListener('keydown', (event) => {
     // Submit Vertex / Edge Modification - ENTER
-    if(event.key === 'Enter' && state.selectedEditor) {
-        modifyVertex(state.selectedVertex, state.selectedEditor, state.isEditing);
-        modifyEdge(state.selectedVertex, state.selectedEditor, state.isEditing);
+    if(event.key === 'Enter') {
+        if(state.selectedVertex) {
+            modifyVertex();
+        } else if(state.selectedEdge) {
+            modifyEdge();
+        }
     }    
     
     // Delete Vertex - BACKSPACE
@@ -96,7 +106,7 @@ document.addEventListener('keydown', (event) => {
         deleteEdge(state.selectedEdge, state.edges);
         
         // Delete Editor - BACKSPACE
-        deleteEditor(state.selectedEditor, state.isEditing);
+        deleteEditor();;
 
         state.isEditing = false;
     }
