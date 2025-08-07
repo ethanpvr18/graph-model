@@ -1,11 +1,6 @@
 import "./GraphFunctions.js";
 import { state, model } from "./state.js"
 
-// Create Window
-const model = document.createElement('div');
-model.classList.add('model');
-document.body.appendChild(model);
-
 document.addEventListener('click', (event) => {
     // Deselect Vertex / Edge
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
