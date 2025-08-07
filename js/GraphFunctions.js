@@ -1,4 +1,5 @@
 import "./Graph.js";
+import { state, model } from "./state.js"
 
 function select(element, selectedElement) {
     if(selectedElement) {
@@ -26,42 +27,42 @@ function createVertex(label) {
 
     model.appendChild(vertex);
 
-    edges.push({ vertex, label  });
+    state.edges.push({ vertex, label  });
 }
 
-function deleteVertex(selectedVertex, edges) {
-    if(selectedVertex) {
-        if(model.contains(selectedVertex)) {
+function deleteVertex() {
+    if(state.selectedVertex) {
+        if(model.contains(state.selectedVertex)) {
             
-            edges
-            .filter(({ v1, v2 }) => v1 === selectedVertex || v2 === selectedVertex)
+            state.edges
+            .filter(({ v1, v2 }) => v1 === state.selectedVertex || v2 === state.selectedVertex)
             .forEach(({ edge, label }) => {
                 if (model.contains(edge)) model.removeChild(edge);
                 if (model.contains(label)) model.removeChild(label);
             });
 
-            edges = edges.filter(({ v1, v2 }) => v1 !== selectedVertex && v2 !== selectedVertex);
+            state.edges = state.edges.filter(({ v1, v2 }) => v1 !== state.selectedVertex && v2 !== state.selectedVertex);
 
-            model.removeChild(selectedVertex);
-            selectedVertex = null;
+            model.removeChild(state.selectedVertex);
+            state.selectedVertex = null;
         }
     }
 }
 
-function modifyVertex(selectedVertex, selectedEditor, isEditing) {
-    if(model.contains(selectedVertex)) {
-        selectedVertex.textContent = selectedEditor.value;
-        selectedVertex.style.border = 'none';
+function modifyVertex() {
+    if(model.contains(state.selectedVertex)) {
+        state.selectedVertex.textContent = state.selectedEditor.value;
+        state.selectedVertex.style.border = 'none';
     }
 
-    selectedVertex = null;
+    state.selectedVertex = null;
 
-    if(model.contains(selectedEditor)) {
-        model.removeChild(selectedEditor);
+    if(model.contains(state.selectedEditor)) {
+        model.removeChild(state.selectedEditor);
     }
 
-    selectedEditor = null;
-    isEditing = false;
+    state.selectedEditor = null;
+    state.isEditing = false;
 }
 
 function createEdge(v1, v2, edgeWeight) {
@@ -73,11 +74,11 @@ function createEdge(v1, v2, edgeWeight) {
     label.classList.add('edge-label');
 
     label.addEventListener('focus', (event) => {
-        isEditing = true;
+        state.isEditing = true;
     });
 
     label.addEventListener('blur', (event) => {
-        isEditing = false;
+        state.isEditing = false;
     });
 
     model.appendChild(edge);
@@ -112,62 +113,62 @@ function createEdge(v1, v2, edgeWeight) {
 
     update();
 
-    edges.push({ edge, label, v1, v2, update });
+    state.edges.push({ edge, label, v1, v2, update });
 }
 
-function deleteEdge(selectedEdge, edges) {
-    if(selectedEdge) {
-        const index = edges.findIndex(e => e.edge === selectedEdge);
+function deleteEdge() {
+    if(state.selectedEdge) {
+        const index = state.edges.findIndex(e => e.edge === state.selectedEdge);
         if (index !== -1) {
-            const { edge, label } = edges[index];
+            const { edge, label } = state.edges[index];
 
             if (model.contains(edge)) model.removeChild(edge);
             if (model.contains(label)) model.removeChild(label);
 
-            edges.splice(index, 1);
+            state.edges.splice(index, 1);
         }
 
-        selectedEdge = null;
+        state.selectedEdge = null;
     }
 }
 
-function modifyEdge(selectedEdge, selectedEditor, isEditing) {
-    if(model.contains(selectedEdge)) {
-        selectedEdge.textContent = selectedEditor.value;
-        selectedEdge.style.border = 'none';
+function modifyEdge() {
+    if(model.contains(state.selectedEdge)) {
+        state.selectedEdge.textContent = state.selectedEditor.value;
+        state.selectedEdge.style.border = 'none';
     }
 
-    selectedEdge = null;
+    state.selectedEdge = null;
 
-    if(model.contains(selectedEditor)) {
-        model.removeChild(selectedEditor);
+    if(model.contains(state.selectedEditor)) {
+        model.removeChild(state.selectedEditor);
     }
 
-    selectedEditor = null;
-    isEditing = false;
+    state.selectedEditor = null;
+    state.isEditing = false;
 }
 
-function createEditor(selectedEditor, existingContent, leftPosition, rightPosition) {
-    selectedEditor = document.createElement('input');
-    selectedEditor.type = 'text';
-    selectedEditor.classList.add('editor');
-    selectedEditor.value = existingContent;
+function createEditor(existingContent, leftPosition, rightPosition) {
+    state.selectedEditor = document.createElement('input');
+    state.selectedEditor.type = 'text';
+    state.selectedEditor.classList.add('editor');
+    state.selectedEditor.value = existingContent;
 
     const modelRect = model.getBoundingClientRect();
-    const vertexRect = selectedVertex.getBoundingClientRect();
+    const vertexRect = state.selectedVertex.getBoundingClientRect();
 
-    selectedEditor.style.left = leftPosition;
-    selectedEditor.style.top =  rightPosition;
+    state.selectedEditor.style.left = leftPosition;
+    state.selectedEditor.style.top =  rightPosition;
 
-    model.appendChild(selectedEditor);
+    model.appendChild(state.selectedEditor);
 }
 
-function deleteEditor(selectedEditor, isEditing) {
-    if(selectedEditor) {
-        if(model.contains(selectedEditor)) {
-            model.removeChild(selectedEditor);
-            selectedEditor = null;
-            isEditing = false;
+function deleteEditor() {
+    if(state.selectedEditor) {
+        if(model.contains(state.selectedEditor)) {
+            model.removeChild(state.selectedEditor);
+            state.selectedEditor = null;
+            state.isEditing = false;
         }
     }
 }
