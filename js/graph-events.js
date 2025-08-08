@@ -15,6 +15,9 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('dblclick', (event) => {
+
+    console.log(event.target.classList);
+
     // Create Vertex
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
         createVertex(`v${state.vertexNumber++}`, event);
@@ -65,6 +68,7 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('edge-label')) {
+        console.log('edge-label');
         // Select Edge Label
         const label = event.target;
         const modelRect = model.getBoundingClientRect();
