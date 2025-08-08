@@ -101,7 +101,7 @@ document.addEventListener('keydown', (event) => {
     if((event.key === 'Backspace') && !state.isEditing) {
         event.preventDefault();
 
-        console.log('Backspace Pressed.');
+        console.log('Backspace Pressed on ' + state.selectedVertex + '   ' + state.selectedEdge + '   ' + state.selectedEditor);
 
         if(state.selectedVertex){
             console.log(state.selectedVertex.textContent);
