@@ -1,4 +1,4 @@
-import "./graph-functions.js";
+import { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, createEditor, deleteEditor, saveGraph } from "./graph-functions.js";
 import { state, model } from "./graph-state.js";
 
 document.addEventListener('click', (event) => {
