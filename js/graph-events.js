@@ -16,6 +16,7 @@ document.addEventListener('click', (event) => {
 
 document.addEventListener('dblclick', (event) => {
 
+    console.log('double click');
     console.log(event.target.classList);
 
     // Create Vertex
