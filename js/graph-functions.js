@@ -1,5 +1,5 @@
-import "./Graph.js";
-import { state, model } from "./state.js"
+import "./graph-events.js";
+import { state, model } from "./graph-state.js"
 
 function select(type, element) {
     if(type === 'vertex') {

@@ -1,5 +1,5 @@
-import "./GraphFunctions.js";
-import { state, model } from "./State.js";
+import "./graph-functions.js";
+import { state, model } from "./graph-state.js";
 
 document.addEventListener('click', (event) => {
     // Deselect Vertex / Edge

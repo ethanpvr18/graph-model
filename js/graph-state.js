@@ -1,4 +1,4 @@
-// State.js
+// graph-state.js
 
 // Shared state variables
 export const state = {
