@@ -95,17 +95,24 @@ document.addEventListener('keydown', (event) => {
         }
     }    
     
+    console.log('Key Pressed.');
+
     // Delete Vertex - BACKSPACE
     if((event.key === 'Backspace') && !state.isEditing) {
         event.preventDefault();
 
+        console.log('Backspace Pressed.');
+
         if(state.selectedVertex){
+            console.log(state.selectedVertex.textContent);
              // Delete Vertex - BACKSPACE
             deleteVertex()
         } else if(state.selectedEdge){
+            console.log(state.selectedEdge.textContent);
             // Delete Edge - BACKSPACE
             deleteEdge(state.selectedEdge, state.edges);
         } else if(state.selectedEditor){
+            console.log(state.selectedEditor.textContent);
              // Delete Editor - BACKSPACE
             deleteEditor();;
         }
