@@ -68,19 +68,25 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('edge-label')) {
-        console.log('Case 4');
-        // Select Edge
-        const edgeLabel = event.target;
-        if(!state.selectedEdgeLabel) {
-            // Select Edge Label
-            select('edge-label', state.selectedEdgeLabel);
+        // Select Edge Label
+        const label = event.target;
+        const modelRect = model.getBoundingClientRect();
+        const vertexRect = vertex.getBoundingClientRect();
 
-            createEditor(state.selectedEdge.textContent, 
+        if (!state.selectedEdgeLabel) {
+            // Select Edge Label
+            select('edge-label', label);
+
+            // Open Editor
+            createEditor(state.selectedEdgeLabel.textContent, 
                         `${parseInt(state.edges.label.style.left, 10) + 20}px`,
                         `${parseInt(state.edges.label.style.top, 10)}px`);
 
         } else {
-            // Close Editor
+            // Deselect Edge Label
+            deselect('edge-label', state.selectedEdgeLabel);
+            
+            // Close and Open Editor
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
