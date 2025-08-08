@@ -95,7 +95,7 @@ document.addEventListener('keydown', (event) => {
         }
     }    
     
-    console.log('Key Pressed.');
+    console.log('Key Pressed = ' + event.key);
 
     // Delete Vertex - BACKSPACE
     if((event.key === 'Backspace') && !state.isEditing) {
