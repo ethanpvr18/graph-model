@@ -12,7 +12,7 @@ export const state = {
     isDragging: false,
     isEditing: false,
     vertices: [],
-    edges: [],
+    edges: []
 };
 
 // Create and export the model container
