@@ -118,9 +118,8 @@ function createEdge(v1, v2, edgeWeight) {
         label.addEventListener('dblclick', (event) => {
             // Open Editor
             createEditor(state.selectedEdge.textContent, 
-                        `${label.style.left + 20}px`,
-                        `${label.style.top}px`);
-
+                        `${parseInt(label.style.left, 10) + 20}px`,
+                        `${parseInt(label.style.top, 10)}px`);
         });
     };
 
@@ -164,6 +163,8 @@ function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor.type = 'text';
     state.selectedEditor.classList.add('editor');
     state.selectedEditor.value = existingContent;
+    state.selectedEditor.style.left = leftPosition;
+    state.selectedEditor.style.top =  topPosition;
 
     state.selectedEditor.addEventListener('focus', () => {
         state.isEditing = true;
@@ -172,9 +173,6 @@ function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor.addEventListener('blur', () => {
         state.isEditing = false;
     });
-
-    state.selectedEditor.style.left = leftPosition;
-    state.selectedEditor.style.top =  topPosition;
 
     model.appendChild(state.selectedEditor);
     state.selectedEditor.blur();
