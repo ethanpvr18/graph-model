@@ -99,14 +99,16 @@ document.addEventListener('keydown', (event) => {
     if((event.key === 'Backspace') && !state.isEditing) {
         event.preventDefault();
 
-        // Delete Vertex - BACKSPACE
-        deleteVertex()
-
-        // Delete Edge - BACKSPACE
-        deleteEdge(state.selectedEdge, state.edges);
-        
-        // Delete Editor - BACKSPACE
-        deleteEditor();;
+        if(state.selectedVertex){
+             // Delete Vertex - BACKSPACE
+            deleteVertex()
+        } else if(state.selectedEdge){
+            // Delete Edge - BACKSPACE
+            deleteEdge(state.selectedEdge, state.edges);
+        } else if(state.selectedEditor){
+             // Delete Editor - BACKSPACE
+            deleteEditor();;
+        }
 
         state.isEditing = false;
     }
