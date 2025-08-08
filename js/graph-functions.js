@@ -153,6 +153,16 @@ function modifyEdge() {
     deleteEditor();
 }
 
+function modifyEdgeLabel() {
+    if(model.contains(state.selectedEdgeLabel)) {
+        state.selectedEdgeLabel.textContent = state.selectedEditor.value;
+    }
+
+    state.selectedEdgeLabel = null;
+
+    deleteEditor();
+}
+
 function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor = document.createElement('input');
     state.selectedEditor.type = 'text';
