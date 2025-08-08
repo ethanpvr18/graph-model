@@ -16,7 +16,7 @@ document.addEventListener('click', (event) => {
 
 document.addEventListener('dblclick', (event) => {
     // Create Vertex
-    if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
+    if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
         console.log('Case 1');
         createVertex(`v${state.vertexNumber++}`, event);
 
