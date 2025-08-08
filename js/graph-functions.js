@@ -180,6 +180,11 @@ function deleteEditor() {
             state.isEditing = false;
         }
     }
+
+    const editors = model.querySelectorAll('.editor');
+    editors.forEach(editor => {
+        model.removeChild(editor);
+    });
 }
 
 function saveGraph() {

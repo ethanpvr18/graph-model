@@ -107,7 +107,7 @@ document.addEventListener('keydown', (event) => {
         }
 
         if(state.selectedEditor){
-             // Delete Editor - BACKSPACE
+            // Delete Editor - BACKSPACE
             deleteEditor();
         }
     }
