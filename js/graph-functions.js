@@ -169,6 +169,7 @@ function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor.style.top =  topPosition;
 
     model.appendChild(state.selectedEditor);
+    state.selectedEditor.blur();
 }
 
 function deleteEditor() {
