@@ -1,4 +1,6 @@
 // graph-state.js
+import "./graph-functions.js";
+import "./graph-events.js";
 
 // Shared state variables
 export const state = {
