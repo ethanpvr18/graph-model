@@ -1,4 +1,4 @@
-// state.js
+// State.js
 
 // Shared state variables
 export const state = {

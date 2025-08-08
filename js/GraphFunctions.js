@@ -1,5 +1,5 @@
-import "./Graph.js";
-import { state, model } from "./state.js"
+import "./js/Graph.js";
+import { state, model } from "./js/state.js"
 
 function select(type, element) {
     if(type === 'vertex') {
@@ -222,7 +222,7 @@ function saveGraph() {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'graph.json';
+    a.download = "./graph.json";
     document.body.appendChild(a);
     
     a.click();
