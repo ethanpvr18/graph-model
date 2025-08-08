@@ -114,6 +114,14 @@ function createEdge(v1, v2, edgeWeight) {
         const labelY = (y1 + y2) / 2;
         label.style.left = `${labelX + 5}px`;
         label.style.top = `${labelY - 10}px`;
+
+        label.addEventListener('dblclick', (event) => {
+            // Open Editor
+            createEditor(state.selectedEdge.textContent, 
+                        `${label.style.left + 20}px`,
+                        `${label.style.top}px`);
+
+        });
     };
 
     update();

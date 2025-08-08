@@ -56,12 +56,7 @@ document.addEventListener('dblclick', (event) => {
         if(!state.selectedEdge) {
             // Select Edge
             select('edge', edge);
-
-            // Open Editor
-            createEditor(state.selectedEdge.textContent, 
-                        (parseInt(state.selectedEdge.style.left) + 27) + 'px',
-                        (parseInt(state.selectedEdge.style.top) - 5) + 'px');
-
+            
         } else {
             // Deselect Edge
             deselect('edge', state.selectedEdge);
