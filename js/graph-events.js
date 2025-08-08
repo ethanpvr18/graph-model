@@ -17,11 +17,9 @@ document.addEventListener('click', (event) => {
 document.addEventListener('dblclick', (event) => {
     // Create Vertex
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
-        console.log('Case 1');
         createVertex(`v${state.vertexNumber++}`, event);
 
     } else if(event.target.classList.contains('vertex')) {
-        console.log('Case 2');
         // Select Vertex
         const vertex = event.target;
         const modelRect = model.getBoundingClientRect();
@@ -53,7 +51,6 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('edge')) {
-        console.log('Case 3');
         // Select Edge
         const edge = event.target;
         if(!state.selectedEdge) {
@@ -90,7 +87,6 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
-        console.log('Case 5');
         // Select Editor
         const editor = event.target;
         if(!state.selectedEditor) {
