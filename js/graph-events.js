@@ -70,20 +70,25 @@ document.addEventListener('dblclick', (event) => {
         const modelRect = model.getBoundingClientRect();
         const vertexRect = vertex.getBoundingClientRect();
 
+        console.log('Here1');
         if (!state.selectedEdgeLabel) {
             // Select Edge Label
+            console.log('Here2');
             select('edge-label', label);
 
             // Open Editor
+            console.log('Here3');
             createEditor(state.selectedEdgeLabel.textContent, 
                         `${parseInt(state.edges.label.style.left, 10) + 20}px`,
                         `${parseInt(state.edges.label.style.top, 10)}px`);
 
         } else {
             // Deselect Edge Label
+            console.log('Here4');
             deselect('edge-label', state.selectedEdgeLabel);
             
             // Close and Open Editor
+            console.log('Here5');
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
