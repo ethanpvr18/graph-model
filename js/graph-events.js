@@ -104,15 +104,15 @@ document.addEventListener('keydown', (event) => {
         console.log('Backspace Pressed on ' + state.selectedVertex + '   ' + state.selectedEdge + '   ' + state.selectedEditor);
 
         if(state.selectedVertex){
-            console.log(state.selectedVertex.textContent);
+            console.log("On : " + state.selectedVertex.textContent);
              // Delete Vertex - BACKSPACE
             deleteVertex()
         } else if(state.selectedEdge){
-            console.log(state.selectedEdge.textContent);
+            console.log("On : " + state.selectedEdge.textContent);
             // Delete Edge - BACKSPACE
             deleteEdge(state.selectedEdge, state.edges);
         } else if(state.selectedEditor){
-            console.log(state.selectedEditor.textContent);
+            console.log("On : " + state.selectedEditor.textContent);
              // Delete Editor - BACKSPACE
             deleteEditor();;
         }
