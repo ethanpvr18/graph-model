@@ -116,6 +116,7 @@ function createEdge(v1, v2, edgeWeight) {
         label.style.top = `${labelY - 10}px`;
 
         label.addEventListener('dblclick', (event) => {
+            console.log('Case 6');
             // Open Editor
             createEditor(state.selectedEdge.textContent, 
                         `${parseInt(label.style.left, 10) + 20}px`,

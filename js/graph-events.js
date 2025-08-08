@@ -17,9 +17,11 @@ document.addEventListener('click', (event) => {
 document.addEventListener('dblclick', (event) => {
     // Create Vertex
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
+        console.log('Case 1');
         createVertex(`v${state.vertexNumber++}`, event);
 
     } else if(event.target.classList.contains('vertex')) {
+        console.log('Case 2');
         // Select Vertex
         const vertex = event.target;
         const modelRect = model.getBoundingClientRect();
@@ -31,8 +33,8 @@ document.addEventListener('dblclick', (event) => {
 
             // Open Editor
             createEditor(vertex.textContent, 
-                            (vertexRect.left - modelRect.left + 50) + 'px',
-                            (vertexRect.top - modelRect.top - 10) + 'px');
+                            (vertexRect.left - modelRect.left + 27) + 'px',
+                            (vertexRect.top - modelRect.top - 5) + 'px');
 
         } else if((state.selectedVertex !== vertex)){
             // Create Edge
@@ -51,17 +53,28 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('edge')) {
+        console.log('Case 3');
         // Select Edge
         const edge = event.target;
         if(!state.selectedEdge) {
             // Select Edge
             select('edge', edge);
+            
+        } else {
+            // Deselect Edge
+            deselect('edge', state.selectedEdge);
 
-            // Open Editor
-            createEditor(edge.textContent, 
-                            (vertexRect.left - modelRect.left + 50) + 'px',
-                            (vertexRect.top - modelRect.top - 10) + 'px');
-
+            // Close Editor
+            deleteEditor();
+        }
+    } else if(event.target.classList.contains('edge-label')) {
+        console.log('Case 4');
+        // Select Edge
+        const edgeLabel = event.target;
+        if(!state.selectedEdge) {
+            // Select Edge
+            select('edge', edge);
+            
         } else {
             // Deselect Edge
             deselect('edge', state.selectedEdge);
@@ -70,6 +83,7 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
+        console.log('Case 5');
         // Select Editor
         const editor = event.target;
         if(!state.selectedEditor) {
