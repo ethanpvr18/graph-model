@@ -10,6 +10,8 @@ function select(type, element) {
     } else if(type === 'edge') {
         state.selectedEdge = element;
         element.style.border = "3px solid red";
+    } else if(type === 'edge-label') {
+        state.selectedEdgeLabel = element;
     }
 }
 
@@ -113,15 +115,7 @@ function createEdge(v1, v2, edgeWeight) {
         const labelX = (x1 + x2) / 2;
         const labelY = (y1 + y2) / 2;
         label.style.left = `${labelX + 5}px`;
-        label.style.top = `${labelY - 10}px`;
-
-        label.addEventListener('dblclick', (event) => {
-            console.log('Case 6');
-            // Open Editor
-            createEditor(state.selectedEdge.textContent, 
-                        `${parseInt(label.style.left, 10) + 20}px`,
-                        `${parseInt(label.style.top, 10)}px`);
-        });
+        label.style.top = `${labelY - 10}px`;        
     };
 
     update();

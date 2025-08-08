@@ -71,14 +71,15 @@ document.addEventListener('dblclick', (event) => {
         console.log('Case 4');
         // Select Edge
         const edgeLabel = event.target;
-        if(!state.selectedEdge) {
-            // Select Edge
-            select('edge', edge);
-            
-        } else {
-            // Deselect Edge
-            deselect('edge', state.selectedEdge);
+        if(!state.selectedEdgeLabel) {
+            // Select Edge Label
+            select('edge-label', state.selectedEdgeLabel);
 
+            createEditor(state.selectedEdge.textContent, 
+                        `${parseInt(state.edges.label.style.left, 10) + 20}px`,
+                        `${parseInt(state.edges.label.style.top, 10)}px`);
+
+        } else {
             // Close Editor
             deleteEditor();
         }
