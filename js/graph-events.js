@@ -15,7 +15,6 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('dblclick', (event) => {
-    
 
     if(event.target.classList.contains('vertex')) {
         // Select Vertex
@@ -107,6 +106,8 @@ document.addEventListener('keydown', (event) => {
         if(state.selectedVertex) {
             modifyVertex();
         } else if(state.selectedEdge) {
+            modifyEdge();
+        } else if(state.selectedEdgeLabel) {
             modifyEdge();
         }
     }    
