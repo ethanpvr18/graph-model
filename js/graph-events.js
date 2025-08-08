@@ -15,15 +15,9 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('dblclick', (event) => {
+    
 
-    console.log('double click');
-    console.log(event.target.classList);
-
-    // Create Vertex
-    if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
-        createVertex(`v${state.vertexNumber++}`, event);
-
-    } else if(event.target.classList.contains('vertex')) {
+    if(event.target.classList.contains('vertex')) {
         // Select Vertex
         const vertex = event.target;
         const modelRect = model.getBoundingClientRect();
@@ -69,31 +63,25 @@ document.addEventListener('dblclick', (event) => {
             deleteEditor();
         }
     } else if(event.target.classList.contains('edge-label')) {
-        console.log('edge-label');
         // Select Edge Label
         const label = event.target;
         const modelRect = model.getBoundingClientRect();
         const vertexRect = vertex.getBoundingClientRect();
 
-        console.log('Here1');
         if (!state.selectedEdgeLabel) {
             // Select Edge Label
-            console.log('Here2');
             select('edge-label', label);
 
             // Open Editor
-            console.log('Here3');
             createEditor(state.selectedEdgeLabel.textContent, 
                         `${parseInt(state.edges.label.style.left, 10) + 20}px`,
                         `${parseInt(state.edges.label.style.top, 10)}px`);
 
         } else {
             // Deselect Edge Label
-            console.log('Here4');
             deselect('edge-label', state.selectedEdgeLabel);
             
             // Close and Open Editor
-            console.log('Here5');
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
@@ -106,6 +94,9 @@ document.addEventListener('dblclick', (event) => {
             state.selectedEditor = null;
             state.selectedEditor.blur();
         }
+    } else if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
+        // Create Vertex
+        createVertex(`v${state.vertexNumber++}`, event);
     }
 });
 
