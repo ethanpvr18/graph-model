@@ -1,7 +1,7 @@
 import "./graph-events.js";
 import { state, model } from "./graph-state.js"
 
-export { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, createEditor, deleteEditor, saveGraph };
+export { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, modifyEdgeLabel, createEditor, deleteEditor, saveGraph };
 
 function select(type, element) {
     if(type === 'vertex') {
