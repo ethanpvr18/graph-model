@@ -10,7 +10,7 @@ function select(type, element) {
     } else if(type === 'edge') {
         state.selectedEdge = element;
         element.style.border = "3px solid red";
-    }    
+    }
 }
 
 function deselect(type, element) {
@@ -167,13 +167,19 @@ function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor.classList.add('editor');
     state.selectedEditor.value = existingContent;
 
-    const modelRect = model.getBoundingClientRect();
-    const vertexRect = state.selectedVertex.getBoundingClientRect();
+    state.selectedEditor.addEventListener('focus', () => {
+        state.isEditing = true;
+    });
+
+    state.selectedEditor.addEventListener('blur', () => {
+        state.isEditing = false;
+    });
 
     state.selectedEditor.style.left = leftPosition;
     state.selectedEditor.style.top =  topPosition;
 
     model.appendChild(state.selectedEditor);
+    state.selectedEditor.focus();
 }
 
 function deleteEditor() {
