@@ -100,7 +100,7 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
 
         // Delete Vertex - BACKSPACE
-        deleteVertex(state.selectedVertex, state.edges)
+        deleteVertex()
 
         // Delete Edge - BACKSPACE
         deleteEdge(state.selectedEdge, state.edges);
