@@ -67,12 +67,7 @@ function modifyVertex() {
 
     state.selectedVertex = null;
 
-    if(model.contains(state.selectedEditor)) {
-        model.removeChild(state.selectedEditor);
-    }
-
-    state.selectedEditor = null;
-    state.isEditing = false;
+    deleteEditor();
 }
 
 function createEdge(v1, v2, edgeWeight) {
@@ -153,12 +148,7 @@ function modifyEdge() {
 
     state.selectedEdge = null;
 
-    if(model.contains(state.selectedEditor)) {
-        model.removeChild(state.selectedEditor);
-    }
-
-    state.selectedEditor = null;
-    state.isEditing = false;
+    deleteEditor();
 }
 
 function createEditor(existingContent, leftPosition, topPosition) {

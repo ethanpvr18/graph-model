@@ -4,7 +4,6 @@ import { state, model } from "./graph-state.js";
 document.addEventListener('click', (event) => {
     // Deselect Vertex / Edge
     if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
-        state.isEditing = false;
         if(state.selectedVertex) {
             deselect('vertex', state.selectedVertex);
         } else if(state.selectedEdge) {
@@ -17,10 +16,10 @@ document.addEventListener('click', (event) => {
 
 document.addEventListener('dblclick', (event) => {
     // Create Vertex
-    if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor') && state.isEditing) {
+    if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('editor')) {
         createVertex(`v${state.vertexNumber++}`, event);
 
-    } else if(event.target.classList.contains('vertex') && state.isEditing) {
+    } else if(event.target.classList.contains('vertex')) {
         // Select Vertex
         const vertex = event.target;
         const modelRect = model.getBoundingClientRect();
@@ -35,7 +34,7 @@ document.addEventListener('dblclick', (event) => {
                             (vertexRect.left - modelRect.left + 27) + 'px',
                             (vertexRect.top - modelRect.top - 5) + 'px');
 
-        } else if((state.selectedVertex !== vertex) && state.isEditing){
+        } else if((state.selectedVertex !== vertex)){
             // Create Edge
             createEdge(state.selectedVertex, vertex, `e${state.edgeNumber++}`);
 
@@ -51,7 +50,7 @@ document.addEventListener('dblclick', (event) => {
             // Close Editor
             deleteEditor();
         }
-    } else if(event.target.classList.contains('edge') && state.isEditing) {
+    } else if(event.target.classList.contains('edge')) {
         // Select Edge
         const edge = event.target;
         if(!state.selectedEdge) {
@@ -114,8 +113,6 @@ document.addEventListener('keydown', (event) => {
              // Delete Editor - BACKSPACE
             deleteEditor();;
         }
-
-        state.isEditing = false;
     }
 
     // Save Graph - e
