@@ -105,10 +105,10 @@ document.addEventListener('keydown', (event) => {
     if(event.key === 'Enter') {
         if(state.selectedVertex) {
             modifyVertex();
-        } else if(state.selectedEdge) {
-            modifyEdge();
         } else if(state.selectedEdgeLabel) {
             modifyEdgeLabel();
+        } else if(state.selectedEdge) {
+            modifyEdge();
         }
     }    
     
