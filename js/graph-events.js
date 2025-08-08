@@ -31,8 +31,8 @@ document.addEventListener('dblclick', (event) => {
 
             // Open Editor
             createEditor(vertex.textContent, 
-                            (vertexRect.left - modelRect.left + 27) + 'px',
-                            (vertexRect.top - modelRect.top - 5) + 'px');
+                            (vertexRect.left - modelRect.left + 50) + 'px',
+                            (vertexRect.top - modelRect.top - 10) + 'px');
 
         } else if((state.selectedVertex !== vertex)){
             // Create Edge
@@ -56,7 +56,12 @@ document.addEventListener('dblclick', (event) => {
         if(!state.selectedEdge) {
             // Select Edge
             select('edge', edge);
-            
+
+            // Open Editor
+            createEditor(edge.textContent, 
+                            (vertexRect.left - modelRect.left + 50) + 'px',
+                            (vertexRect.top - modelRect.top - 10) + 'px');
+
         } else {
             // Deselect Edge
             deselect('edge', state.selectedEdge);
