@@ -108,7 +108,7 @@ document.addEventListener('keydown', (event) => {
         } else if(state.selectedEdge) {
             modifyEdge();
         } else if(state.selectedEdgeLabel) {
-            modifyEdge();
+            modifyEdgeLabel();
         }
     }    
     
