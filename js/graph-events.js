@@ -48,6 +48,29 @@ document.addEventListener('dblclick', (event) => {
             // Close Editor
             deleteEditor();
         }
+    
+    } else if(event.target.classList.contains('edge-label')) {
+        // Select Edge Label
+        const label = event.target;
+        const modelRect = model.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+
+        if (!state.selectedEdgeLabel) {
+            // Select Edge Label
+            select('edge-label', label);
+
+            // Open Editor
+            createEditor(label.textContent, 
+                        (labelRect.left - modelRect.left + 20) + 'px',
+                        (labelRect.top - modelRect.top) + 'px');
+
+        } else {
+            // Deselect Edge Label
+            deselect('edge-label', state.selectedEdgeLabel);
+            
+            // Close and Open Editor
+            deleteEditor();
+        }
     } else if(event.target.classList.contains('edge')) {
         // Select Edge
         const edge = event.target;
@@ -60,28 +83,6 @@ document.addEventListener('dblclick', (event) => {
             deselect('edge', state.selectedEdge);
 
             // Close Editor
-            deleteEditor();
-        }
-    } else if(event.target.classList.contains('edge-label')) {
-        // Select Edge Label
-        const label = event.target;
-        const modelRect = model.getBoundingClientRect();
-        const vertexRect = vertex.getBoundingClientRect();
-
-        if (!state.selectedEdgeLabel) {
-            // Select Edge Label
-            select('edge-label', label);
-
-            // Open Editor
-            createEditor(state.selectedEdgeLabel.textContent, 
-                        `${parseInt(state.edges.label.style.left, 10) + 20}px`,
-                        `${parseInt(state.edges.label.style.top, 10)}px`);
-
-        } else {
-            // Deselect Edge Label
-            deselect('edge-label', state.selectedEdgeLabel);
-            
-            // Close and Open Editor
             deleteEditor();
         }
     } else if(event.target.classList.contains('editor')) {
