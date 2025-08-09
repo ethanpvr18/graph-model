@@ -205,7 +205,7 @@ function deleteEditor() {
     });
 }
 
-function saveGraph() {
+function saveGraph(filename) {
     const edgesData = [];
     const edgeLabelsData = [];
     const verticesData = [];
@@ -243,7 +243,7 @@ function saveGraph() {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = "./graph.json";
+    a.download = filename;
     document.body.appendChild(a);
     
     a.click();
@@ -252,15 +252,20 @@ function saveGraph() {
     document.body.removeChild(a);
 }
 
-function loadGraph() {
+function loadGraph(filename) {
 
-    let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
-    let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
-    let testVertex3 = createVertex(0, { clientX: 200, clientY: 100 });
-    let testVertex4 = createVertex(0, { clientX: 200, clientY: 200 });
+    const response = fetch(new Request(filename));
+    const graph = response.json();
 
-    let testEdge1 = createEdge(testVertex1, testVertex2, 1);
-    let testEdge2 = createEdge(testVertex2, testVertex3, 1);
-    let testEdge3 = createEdge(testVertex3, testVertex4, 1);
+    console.log(graph);
+
+    // let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
+    // let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
+    // let testVertex3 = createVertex(0, { clientX: 200, clientY: 100 });
+    // let testVertex4 = createVertex(0, { clientX: 200, clientY: 200 });
+
+    // let testEdge1 = createEdge(testVertex1, testVertex2, 1);
+    // let testEdge2 = createEdge(testVertex2, testVertex3, 1);
+    // let testEdge3 = createEdge(testVertex3, testVertex4, 1);
 
 }

@@ -147,7 +147,7 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
 
         // Save Graph - s
-        saveGraph();
+        saveGraph('./graph.json');
     }
 
     // Load Graph - l
@@ -155,7 +155,7 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
 
         // Load Graph - l
-        loadGraph();
+        loadGraph('./graph.json');
     }
 });
 
