@@ -256,8 +256,8 @@ async function loadGraph() {
         });
     }
 
-    console.log(state.graph.edges);
-    console.log(state.graph.edges[0]);
+    console.log(state.graph.edges.v1);
+    console.log(state.graph.edges.v2);
     console.log(state.graph.edges[0].v1Index);
 
     if(state.graph.edges) {
