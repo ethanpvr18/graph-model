@@ -198,6 +198,7 @@ function deleteEditor() {
         }
     }
 
+    state.selectedEdgeLabel = null;
     const editors = model.querySelectorAll('.editor');
     editors.forEach(editor => {
         model.removeChild(editor);
