@@ -28,19 +28,19 @@ function deselect(type, element) {
 }
 
 function createVertex(label, left, top) {
-
-    if(left == null)
-        left = (event.clientX - modelRect.left - 24)
-
-    if(top == null)
-        top = (event.clientY - modelRect.top - 24)
-
     const vertex = document.createElement('div');
     vertex.classList.add('vertex');
     vertex.textContent = label;
 
     // Set Vertex Position
     const modelRect = model.getBoundingClientRect();
+
+    if(left == null)
+        left = (event.clientX - modelRect.left - 24);
+
+    if(top == null)
+        top = (event.clientY - modelRect.top - 24);
+
     vertex.style.left = left + 'px';
     vertex.style.top = top + 'px';
 
