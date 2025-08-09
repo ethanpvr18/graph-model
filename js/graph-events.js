@@ -102,13 +102,23 @@ document.addEventListener('dblclick', (event) => {
 
 document.addEventListener('keydown', (event) => {
     // Submit Vertex / Edge Modification - ENTER
-    if(event.key === 'Enter') {
+    if(event.key === 'Enter' && state.selectedEditor) {
+        event.preventDefault();
+
         if(state.selectedVertex) {
             modifyVertex();
         } else if(state.selectedEdgeLabel) {
             modifyEdgeLabel();
         } else if(state.selectedEdge) {
             modifyEdge();
+        } else {
+            if(state.selectedEditor.dataset.type === 'vertex'){
+                state.selectedVertex.textContent = state.selectedEditor.value;
+            } else if(state.selectedEditor.dataset.type === 'edge-label'){
+                state.selectedEdgeLabel.textContent = state.selectedEditor.value;
+            }
+
+            deleteEditor();
         }
     }    
     
