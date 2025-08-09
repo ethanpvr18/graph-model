@@ -14,7 +14,8 @@ export const state = {
     isDragging: false,
     isEditing: false,
     vertices: [],
-    edges: []
+    edges: [],
+    graph: []
 };
 
 // Create and export the model container

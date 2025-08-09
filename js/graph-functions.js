@@ -41,6 +41,9 @@ function createVertex(label, event) {
 
     state.vertices.push(vertex);
 
+    if(!state.graph.vertices.vertex)
+        state.graph.vertices.push({ vertex });
+
     return vertex;
 }
 
@@ -124,6 +127,9 @@ function createEdge(v1, v2, edgeWeight) {
 
     state.edges.push({ edge, label, v1, v2, update });
 
+    if(!state.graph.edges.edge)
+        state.graph.edges.push({ edge, label, v1, v2 });
+
     return edge;
 }
 
@@ -206,36 +212,8 @@ function deleteEditor() {
 }
 
 function saveGraph(filename) {
-    const edgesData = [];
-    const edgeLabelsData = [];
-    const verticesData = [];
-
-    document.querySelectorAll('.edge').forEach((div) => {
-        edgesData.push({
-            left: div.style.left,
-            top: div.style.top,
-            width: div.style.width,
-            transform: div.style.transform
-        });
-    });
-
-    document.querySelectorAll('.edge-label').forEach((div) => {
-        edgeLabelsData.push({
-            left: div.style.left,
-            top: div.style.top,
-            label: div.textContent
-        });
-    });
-
-    document.querySelectorAll('.vertex').forEach((div) => {
-        verticesData.push({
-            left: div.style.left,
-            top: div.style.top,
-            label: div.textContent
-        });
-    });
-
-    const data = { edges: edgesData, edgeLabels: edgeLabelsData, vertices: verticesData};
+    
+    const data = { graph: state.graph };
     const dataString = JSON.stringify(data, null, 2);
 
     const blob = new Blob([dataString], { type: 'application/json'});
@@ -263,18 +241,7 @@ async function loadGraph(filename) {
     const response = await fetch(filename);
     const graph = await response.json();
 
-    graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
-    // graph.edges.forEach(createEdge(testVertex1, testVertex2, 1));
-
-
-
-    // let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
-    // let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
-    // let testVertex3 = createVertex(0, { clientX: 200, clientY: 100 });
-    // let testVertex4 = createVertex(0, { clientX: 200, clientY: 200 });
-
-    // let testEdge1 = createEdge(testVertex1, testVertex2, 1);
-    // let testEdge2 = createEdge(testVertex2, testVertex3, 1);
-    // let testEdge3 = createEdge(testVertex3, testVertex4, 1);
+    state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
+    state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
 
 }
