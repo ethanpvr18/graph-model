@@ -254,7 +254,7 @@ function saveGraph(filename) {
 
 async function loadGraph(filename) {
 
-    const file = await window.showOpenFilePicker();
+    [file] = await window.showOpenFilePicker();
 
     console.log(file);
 
