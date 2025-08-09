@@ -253,13 +253,13 @@ function saveGraph() {
 
 function loadGraph() {
 
-    testVertex1 = createVertex(0, null);
-    testVertex2 = createVertex(0, null);
-    testVertex3 = createVertex(0, null);
-    testVertex4 = createVertex(0, null);
+    let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
+    let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
+    let testVertex3 = createVertex(0, { clientX: 200, clientY: 100 });
+    let testVertex4 = createVertex(0, { clientX: 200, clientY: 200 });
 
-    testEdge1 = createEdge(testVertex1, testVertex2, 1);
-    testEdge2 = createEdge(testVertex2, testVerte3, 1);
-    testEdge3 = createEdge(testVertex3, testVertex4, 1);
+    let testEdge1 = createEdge(testVertex1, testVertex2, 1);
+    let testEdge2 = createEdge(testVertex2, testVertex3, 1);
+    let testEdge3 = createEdge(testVertex3, testVertex4, 1);
 
 }
