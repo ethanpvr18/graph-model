@@ -239,15 +239,11 @@ async function loadGraph(filename) {
     const response = await fetch(filename);
     const graph = await response.json();
 
-    console.log(state.graph.vertices);
-    if(state.graph.vertices){
-        console.log('Here1');
+    if(Array.isArray(state.graph.vertices)) {
         state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
     }
 
-    console.log(state.graph.edges);
-    if(state.graph.edges){
-        console.log('Here2');
+    if(Array.isArray(state.graph.edges)) {
         state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
     }
 }
