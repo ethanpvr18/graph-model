@@ -254,10 +254,18 @@ function saveGraph(filename) {
 
 async function loadGraph(filename) {
 
+    const file = await window.showOpenFilePicker();
+
+    console.log(file);
+
     const response = await fetch(filename);
     const graph = await response.json();
 
-    console.log(graph);
+    graph.vertices.forEach(createVertex(label, { clientX: left, clientY: top }));
+    // graph.edges.forEach(createEdge(testVertex1, testVertex2, 1));
+
+
+    console.log(graph.vertices);
 
     // let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
     // let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
