@@ -250,17 +250,17 @@ async function loadGraph() {
 
     state.graph = graph;
 
-    if(Array.isArray(state.graph.vertices)) {
+    if(state.graph.vertices) {
         state.graph.vertices.forEach(v => {
             createVertex(v.textContent, v.style.left, v.style.top);
         });
     }
 
-    console.log(Array.isArray(state.graph.edges));
+    console.log(state.graph.edges);
     console.log(state.graph.edges[0]);
     console.log(state.graph.edges[0].v1Index);
 
-    if(Array.isArray(state.graph.edges)) {
+    if(state.graph.edges) {
         state.graph.edges.forEach(e => { 
             createEdge(e.v1, e.v2, e.label);
         });
