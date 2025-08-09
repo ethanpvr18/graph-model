@@ -220,9 +220,9 @@ function deleteEditor() {
 function saveGraph(filename) {
 
     const vertexData = state.vertices.map(v => ({
-        label: v.textContent,
         left: parseInt(v.style.left, 10),
-        top: parseInt(v.style.top, 10)
+        top: parseInt(v.style.top, 10),
+        label: v.textContent
     }));
 
     const edgeData = state.edges.map(e => ({
@@ -231,7 +231,7 @@ function saveGraph(filename) {
         label: e.label.textContent
     }));
 
-    const data = { vertices: vertexData, edges: edgeData };
+    const data = { edges: edgeData, vertices: vertexData };
     const dataString = JSON.stringify(data, null, 2);
 
     const blob = new Blob([dataString], { type: 'application/json'});
