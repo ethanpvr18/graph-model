@@ -254,9 +254,11 @@ function saveGraph(filename) {
 
 async function loadGraph(filename) {
 
-    [file] = await window.showOpenFilePicker();
+    const [fileHandle] = await window.showOpenFilePicker();
+    const file = await fileHandle.getFile();
+    const fileContent = await file.text();
 
-    console.log(file);
+    console.log(fileContent);
 
     const response = await fetch(filename);
     const graph = await response.json();
