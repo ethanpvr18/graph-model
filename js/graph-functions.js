@@ -256,7 +256,6 @@ async function loadGraph() {
 
     if(Array.isArray(state.graph.edges)) {
         state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
-        state.graph.edges.forEach(edge => createEdge(state.vertices[edge.v1index], state.vertices[edge.v2index], edge.label));
-
+        // state.graph.edges.forEach(edge => createEdge(state.vertices[edge.v1index], state.vertices[edge.v2index], edge.label));
     }
 }
