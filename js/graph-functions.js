@@ -35,10 +35,14 @@ function createVertex(label, left, top) {
     const modelRect = model.getBoundingClientRect();
 
     if(left == null)
-        left = (event.clientX - modelRect.left - 24);
+        left = (window.event.clientX - modelRect.left - 24);
+    else
+        left = 0;
 
     if(top == null)
-        top = (event.clientY - modelRect.top - 24);
+        top = (window.event.clientY - modelRect.top - 24);
+    else
+        top = 0;
 
     vertex.style.left = left + 'px';
     vertex.style.top = top + 'px';
@@ -266,7 +270,9 @@ async function loadGraph() {
 
     if(Array.isArray(graph.edges)) {
         graph.edges.forEach(e => { 
-            createEdge(state.vertices[e.v1Index], state.vertices[e.v2Index], e.label);
+            const v1 = state.vertices[e.v1Index];
+            const v2 = state.vertices[e.v2Index];
+            createEdge(v1, v2, e.label);
         });
     }
 }

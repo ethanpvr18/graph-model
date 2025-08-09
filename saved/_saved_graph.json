@@ -1,74 +1,56 @@
 {
-  "graph": {
-    "edges": [
-      {
-        "left": "54px",
-        "top": "354px",
-        "width": "112.539px",
-        "transform": "rotate(84.3907deg)"
-      },
-      {
-        "left": "68px",
-        "top": "469px",
-        "width": "125.064px",
-        "transform": "rotate(91.8328deg)"
-      },
-      {
-        "edge": {},
-        "label": {},
-        "v1": {},
-        "v2": {}
-      },
-      {
-        "edge": {},
-        "label": {},
-        "v1": {},
-        "v2": {}
-      },
-      {
-        "edge": {},
-        "label": {},
-        "v1": {},
-        "v2": {}
-      }
-    ],
-    "edgeLabels": [
-      {
-        "left": "64.5px",
-        "top": "400px",
-        "label": "e1"
-      },
-      {
-        "left": "71px",
-        "top": "521.5px",
-        "label": "e2"
-      }
-    ],
-    "vertices": [
-      {
-        "left": "30px",
-        "top": "330px",
-        "label": "v1"
-      },
-      {
-        "left": "41px",
-        "top": "442px",
-        "label": "v2"
-      },
-      {
-        "left": "40px",
-        "top": "570px",
-        "label": "v3"
-      },
-      {
-        "vertex": {}
-      },
-      {
-        "vertex": {}
-      },
-      {
-        "vertex": {}
-      }
-    ]
-  }
+  "edges": [
+    {
+      "v1Index": 4,
+      "v2Index": 5,
+      "label": "e8"
+    },
+    {
+      "v1Index": 4,
+      "v2Index": 5,
+      "label": "e9"
+    },
+    {
+      "v1Index": 5,
+      "v2Index": 6,
+      "label": "e10"
+    }
+  ],
+  "vertices": [
+    {
+      "left": 178,
+      "top": 306,
+      "label": "8v1"
+    },
+    {
+      "left": 326,
+      "top": 155,
+      "label": "v29"
+    },
+    {
+      "left": 422,
+      "top": 531,
+      "label": "v39"
+    },
+    {
+      "left": 351,
+      "top": 255,
+      "label": "v4"
+    },
+    {
+      "left": 211,
+      "top": 206,
+      "label": "v5"
+    },
+    {
+      "left": 484,
+      "top": 217,
+      "label": "v6"
+    },
+    {
+      "left": 398,
+      "top": 440,
+      "label": "v7"
+    }
+  ]
 }
