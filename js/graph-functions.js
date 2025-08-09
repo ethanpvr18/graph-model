@@ -236,6 +236,9 @@ async function loadGraph() {
     const file = await fileHandle.getFile();
     const fileContent = await file.text();
 
+    console.log('File Content = ' + fileContent);
+    console.log('\n Here');
+
     const graph = JSON.parse(fileContent);
 
     state.graph = graph;
