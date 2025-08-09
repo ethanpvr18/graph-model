@@ -32,7 +32,6 @@ function createVertex(label, left, top) {
     vertex.classList.add('vertex');
     vertex.textContent = label;
 
-    // Set Vertex Position
     const modelRect = model.getBoundingClientRect();
 
     if(left == null)
@@ -104,7 +103,6 @@ function createEdge(v1, v2, edgeWeight) {
         model.appendChild(edge);
         model.appendChild(label);
 
-        // Generated
         const update = () => {
             const modelRect = model.getBoundingClientRect();
             const v1Rect = v1.getBoundingClientRect();
@@ -224,7 +222,19 @@ function deleteEditor() {
 
 function saveGraph(filename) {
 
-    const data = { graph: state.graph };
+    const vertexData = state.vertices.map(v => ({
+        label: v.textContent,
+        left: parseInt(v.style.left, 10),
+        top: parseInt(v.style.top, 10)
+    }));
+
+    const edgeData = state.edges.map(e => ({
+        v1Index: state.vertices.indexOf(e.v1),
+        v2Index: state.vertices.indexOf(e.v2),
+        label: e.label.textContent
+    }));
+
+    const data = { vertices: vertexData, edges: edgeData };
     const dataString = JSON.stringify(data, null, 2);
 
     const blob = new Blob([dataString], { type: 'application/json'});
@@ -248,25 +258,14 @@ async function loadGraph() {
     const fileContent = await file.text();
     const graph = JSON.parse(fileContent);
 
-    state.graph = graph;
+    state.vertices = [];
+    state.edges = [];
 
-    if(state.graph.vertices) {
-        state.graph.vertices.forEach(v => {
-            createVertex(v.textContent, v.style.left, v.style.top);
-        });
-    }
+    graph.vertices.forEach(v => {
+        state.vertices.push(createVertex(v.label, v.left, v.top));
+    });
 
-    console.log(state.graph.edges.v1);
-    console.log(state.graph.edges.v2);
-    console.log(state.graph.edges[0].v1Index);
-
-    if(state.graph.edges) {
-        state.graph.edges.forEach(e => { 
-            createEdge(e.v1, e.v2, e.label);
-        });
-        // state.graph.edges.forEach(edge => createEdge(state.vertices[edge.v1index], state.vertices[edge.v2index], edge.label));
-    }
+    graph.edges.forEach(e => { 
+        createEdge(state.vertices[e.v1Index], state.vertices[e.v2Index], e.label);
+    });
 }
-
-// state.graph.edges.push({ edge, label, v1, v2 });
-// state.graph.vertices.push({ vertex });
