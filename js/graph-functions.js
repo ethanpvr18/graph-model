@@ -27,15 +27,22 @@ function deselect(type, element) {
     }
 }
 
-function createVertex(label, event) {
+function createVertex(label, left, top) {
+
+    if(left == null)
+        left = (event.clientX - modelRect.left - 24)
+
+    if(top == null)
+        top = (event.clientY - modelRect.top - 24)
+
     const vertex = document.createElement('div');
     vertex.classList.add('vertex');
     vertex.textContent = label;
 
     // Set Vertex Position
     const modelRect = model.getBoundingClientRect();
-    vertex.style.left = (event.clientX - modelRect.left - 24) + 'px';
-    vertex.style.top = (event.clientY - modelRect.top - 24) + 'px';
+    vertex.style.left = left + 'px';
+    vertex.style.top = top + 'px';
 
     model.appendChild(vertex);
 
@@ -78,7 +85,7 @@ function modifyVertex() {
 }
 
 function createEdge(v1, v2, edgeWeight) {
-    if(!v1 && !v2 && !edgeWeight) {
+    if(v1 && v2 && edgeWeight) {
         const edge = document.createElement('div');
         edge.classList.add('edge');
 
@@ -239,19 +246,17 @@ async function loadGraph() {
     const [fileHandle] = await window.showOpenFilePicker();
     const file = await fileHandle.getFile();
     const fileContent = await file.text();
-
-    console.log('File Content = ' + fileContent);
-    console.log('\n Here');
-
     const graph = JSON.parse(fileContent);
 
     state.graph = graph;
 
     if(Array.isArray(state.graph.vertices)) {
-        state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
+        state.graph.vertices.forEach(vertex => createVertex(vertex.label, vertex.left, vertex.top ));
     }
 
     if(Array.isArray(state.graph.edges)) {
         state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
+        state.graph.edges.forEach(edge => createEdge(state.vertices[edge.v1index], state.vertices[edge.v2index], edge.label));
+
     }
 }

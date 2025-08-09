@@ -96,7 +96,7 @@ document.addEventListener('dblclick', (event) => {
         }
     } else if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
         // Create Vertex
-        createVertex(`v${state.vertexNumber++}`, event);
+        createVertex(`v${state.vertexNumber++}`, null, null);
     }
 });
 
