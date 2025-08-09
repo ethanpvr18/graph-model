@@ -236,15 +236,18 @@ async function loadGraph(filename) {
     const file = await fileHandle.getFile();
     const fileContent = await file.text();
 
-    console.log(fileContent);
-
     const response = await fetch(filename);
     const graph = await response.json();
 
-    if(state.graph.vertices)
+    console.log(state.graph.vertices);
+    if(state.graph.vertices){
+        console.log('Here1');
         state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
-    
-    if(state.graph.edges)
-        state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
+    }
 
+    console.log(state.graph.edges);
+    if(state.graph.edges){
+        console.log('Here2');
+        state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
+    }
 }
