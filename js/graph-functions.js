@@ -252,10 +252,10 @@ function saveGraph(filename) {
     document.body.removeChild(a);
 }
 
-function loadGraph(filename) {
+async function loadGraph(filename) {
 
-    const response = fetch(new Request(filename));
-    const graph = response.json();
+    const response = await fetch(filename);
+    const graph = await response.json();
 
     console.log(graph);
 
