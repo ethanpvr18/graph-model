@@ -78,59 +78,63 @@ function modifyVertex() {
 }
 
 function createEdge(v1, v2, edgeWeight) {
-    const edge = document.createElement('div');
-    edge.classList.add('edge');
+    if(!v1 && !v2 && !edgeWeight) {
+        const edge = document.createElement('div');
+        edge.classList.add('edge');
 
-    const label = document.createElement('div');
-    label.textContent = edgeWeight;
-    label.classList.add('edge-label');
+        const label = document.createElement('div');
+        label.textContent = edgeWeight;
+        label.classList.add('edge-label');
 
-    label.addEventListener('focus', (event) => {
-        state.isEditing = true;
-    });
+        label.addEventListener('focus', (event) => {
+            state.isEditing = true;
+        });
 
-    label.addEventListener('blur', (event) => {
-        state.isEditing = false;
-    });
+        label.addEventListener('blur', (event) => {
+            state.isEditing = false;
+        });
 
-    model.appendChild(edge);
-    model.appendChild(label);
+        model.appendChild(edge);
+        model.appendChild(label);
 
-    // Generated
-    const update = () => {
-        const modelRect = model.getBoundingClientRect();
-        const v1Rect = v1.getBoundingClientRect();
-        const v2Rect = v2.getBoundingClientRect();
+        // Generated
+        const update = () => {
+            const modelRect = model.getBoundingClientRect();
+            const v1Rect = v1.getBoundingClientRect();
+            const v2Rect = v2.getBoundingClientRect();
 
-        const x1 = v1Rect.left + v1Rect.width / 2 - modelRect.left;
-        const y1 = v1Rect.top + v1Rect.height / 2 - modelRect.top;
-        const x2 = v2Rect.left + v2Rect.width / 2 - modelRect.left;
-        const y2 = v2Rect.top + v2Rect.height / 2 - modelRect.top;
+            const x1 = v1Rect.left + v1Rect.width / 2 - modelRect.left;
+            const y1 = v1Rect.top + v1Rect.height / 2 - modelRect.top;
+            const x2 = v2Rect.left + v2Rect.width / 2 - modelRect.left;
+            const y2 = v2Rect.top + v2Rect.height / 2 - modelRect.top;
 
-        const dx = x2 - x1;
-        const dy = y2 - y1;
-        const length = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-        edge.style.left = `${x1}px`;
-        edge.style.top = `${y1}px`;
-        edge.style.width = `${length}px`;
-        edge.style.transform = `rotate(${angle}deg)`;
+            edge.style.left = `${x1}px`;
+            edge.style.top = `${y1}px`;
+            edge.style.width = `${length}px`;
+            edge.style.transform = `rotate(${angle}deg)`;
 
-        const labelX = (x1 + x2) / 2;
-        const labelY = (y1 + y2) / 2;
-        label.style.left = `${labelX + 5}px`;
-        label.style.top = `${labelY - 10}px`;        
-    };
+            const labelX = (x1 + x2) / 2;
+            const labelY = (y1 + y2) / 2;
+            label.style.left = `${labelX + 5}px`;
+            label.style.top = `${labelY - 10}px`;        
+        };
 
-    update();
+        update();
 
-    state.edges.push({ edge, label, v1, v2, update });
+        state.edges.push({ edge, label, v1, v2, update });
 
-    if(!state.graph.edges.edge)
-        state.graph.edges.push({ edge, label, v1, v2 });
+        if(!state.graph.edges.edge)
+            state.graph.edges.push({ edge, label, v1, v2 });
 
-    return edge;
+        return edge;
+    } else {
+        return;
+    }
 }
 
 function deleteEdge() {
