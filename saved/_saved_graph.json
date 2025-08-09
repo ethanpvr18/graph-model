@@ -1,0 +1,36 @@
+{
+  "edges": [
+    {
+      "v1Index": 0,
+      "v2Index": 1,
+      "label": "e1"
+    },
+    {
+      "v1Index": 0,
+      "v2Index": 1,
+      "label": "e2"
+    },
+    {
+      "v1Index": 1,
+      "v2Index": 2,
+      "label": "e3"
+    }
+  ],
+  "vertices": [
+    {
+      "left": 211,
+      "top": 195,
+      "label": "v1"
+    },
+    {
+      "left": 464,
+      "top": 200,
+      "label": "v2"
+    },
+    {
+      "left": 348,
+      "top": 440,
+      "label": "v3"
+    }
+  ]
+}

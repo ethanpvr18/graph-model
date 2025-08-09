@@ -134,12 +134,16 @@ function createEdge(v1, v2, edgeWeight) {
 
         state.edges.push({ edge, label, v1, v2, update });
 
+        if(!state.graph)
+            state.graph = {};
+
+        if(!Array.isArray(state.graph.edges))
+            state.graph.edges = [];
+
         if(!state.graph.edges.edge)
             state.graph.edges.push({ edge, label, v1, v2 });
 
         return edge;
-    } else {
-        return;
     }
 }
 
