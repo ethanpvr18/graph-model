@@ -146,17 +146,6 @@ document.addEventListener('mousedown', (event) => {
     if(event.target.classList.contains('vertex')) {
         state.isDragging = true;
         state.currentVertex = event.target;
-
-        const modelRect = model.getBoundingClientRect();
-        state.currentVertex.style.left = (event.clientX - modelRect.left - 24) + 'px';
-        state.currentVertex.style.top = (event.clientY - modelRect.top - 24) + 'px';
-
-        // Generated
-        state.edges.forEach(({ v1, v2, update }) => {
-            if (v1 === state.currentVertex || v2 === state.currentVertex) {
-                update();
-            }
-        });
     }
 });
 
