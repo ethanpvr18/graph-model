@@ -221,7 +221,7 @@ function deleteEditor() {
     });
 }
 
-function saveGraph(filename) {
+async function saveGraph(filename) {
 
     const vertexData = state.vertices.map(v => ({
         left: parseInt(v.style.left, 10),
@@ -238,18 +238,32 @@ function saveGraph(filename) {
     const data = { edges: edgeData, vertices: vertexData };
     const dataString = JSON.stringify(data, null, 2);
 
-    const blob = new Blob([dataString], { type: 'application/json'});
-    const url = URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
+    const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{
+            description: "JSON Files",
+            accept: { "application/json": [".json"] }
+        }]
+    });
+
+    const writable = await handle.createWritable();
+    await writable.write(dataString);
+    await writable.close();
+    // Check in Safari
+
+    // const blob = new Blob([dataString], { type: 'application/json'});
+    // const url = URL.createObjectURL(blob);
+
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = filename;
+    // document.body.appendChild(a);
     
-    a.click();
+    // a.click();
 
-    URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+    // URL.revokeObjectURL(url);
+    // document.body.removeChild(a);
 }
 
 async function loadGraph() {
