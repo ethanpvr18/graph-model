@@ -3,33 +3,33 @@
     {
       "v1Index": 0,
       "v2Index": 1,
-      "label": "e1"
-    },
-    {
-      "v1Index": 0,
-      "v2Index": 1,
-      "label": "e2"
+      "label": "10"
     },
     {
       "v1Index": 1,
       "v2Index": 2,
-      "label": "e3"
+      "label": "3"
+    },
+    {
+      "v1Index": 2,
+      "v2Index": 0,
+      "label": "2"
     }
   ],
   "vertices": [
     {
-      "left": 211,
-      "top": 195,
+      "left": 208,
+      "top": 191,
       "label": "v1"
     },
     {
-      "left": 464,
-      "top": 200,
+      "left": 457,
+      "top": 197,
       "label": "v2"
     },
     {
-      "left": 348,
-      "top": 440,
+      "left": 338,
+      "top": 425,
       "label": "v3"
     }
   ]

@@ -91,8 +91,8 @@ document.addEventListener('dblclick', (event) => {
             state.selectedEditor = editor;
             state.selectedEditor.focus();
         } else {
-            state.selectedEditor = null;
             state.selectedEditor.blur();
+            state.selectedEditor = null;
         }
     } else if(!event.target.classList.contains('vertex') && !event.target.classList.contains('edge') && !event.target.classList.contains('edge-label') && !event.target.classList.contains('editor')) {
         // Create Vertex
