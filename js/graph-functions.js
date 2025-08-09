@@ -212,7 +212,7 @@ function deleteEditor() {
 }
 
 function saveGraph(filename) {
-    
+
     const data = { graph: state.graph };
     const dataString = JSON.stringify(data, null, 2);
 
@@ -241,7 +241,10 @@ async function loadGraph(filename) {
     const response = await fetch(filename);
     const graph = await response.json();
 
-    state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
-    state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
+    if(state.graph.vertices)
+        state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
+    
+    if(state.graph.edges)
+        state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
 
 }
