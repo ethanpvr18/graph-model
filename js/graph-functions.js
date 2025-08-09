@@ -263,11 +263,10 @@ async function loadGraph(filename) {
     const response = await fetch(filename);
     const graph = await response.json();
 
-    graph.vertices.forEach(createVertex(label, { clientX: left, clientY: top }));
+    graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
     // graph.edges.forEach(createEdge(testVertex1, testVertex2, 1));
 
 
-    // console.log(graph.vertices);
 
     // let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
     // let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
