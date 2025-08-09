@@ -132,12 +132,20 @@ document.addEventListener('keydown', (event) => {
         }
     }
 
-    // Save Graph - e
-    if(event.key === 'e') {
+    // Save Graph - s
+    if(event.key === 's') {
         event.preventDefault();
 
-        // Save Graph - e
+        // Save Graph - s
         saveGraph();
+    }
+
+    // Load Graph - l
+    if(event.key === 'l') {
+        event.preventDefault();
+
+        // Load Graph - l
+        loadGraph();
     }
 });
 
