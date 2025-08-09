@@ -31,20 +31,21 @@ function createVertex(label, left, top) {
     const vertex = document.createElement('div');
     vertex.classList.add('vertex');
     vertex.textContent = label;
+    vertex.style.border = "none";
 
     const modelRect = model.getBoundingClientRect();
 
     if(left == null)
         if(window.event)
-            left = window.event.clientX - modelRect.left - 24;
+            left = window.event.clientX - modelRect.left - 24 + 'px';
         else
-            left = 0;
+            left = 0 + 'px';
 
     if(top == null)
         if(window.event)
-            top = window.event.clientY - modelRect.top - 24;
+            top = window.event.clientY - modelRect.top - 24 + 'px';
         else
-            top = 0;
+            top = 0 + 'px';
 
     vertex.style.left = left + 'px';
     vertex.style.top = top + 'px';
@@ -232,13 +233,19 @@ async function saveGraph(filename) {
     const vertexData = state.vertices.map(v => ({
         left: parseInt(v.style.left, 10),
         top: parseInt(v.style.top, 10),
-        label: v.textContent
+        label: v.textContent,
+        border: 'none'
     }));
 
     const edgeData = state.edges.map(e => ({
         v1Index: state.vertices.indexOf(e.v1),
         v2Index: state.vertices.indexOf(e.v2),
-        label: e.label.textContent
+        label: e.label.textContent,
+        border: 'none',
+        left: parseInt(e.style.left, 10),
+        top: parseInt(e.style.top, 10),
+        width: parseInt(e.style.width, 10),
+        transform: parseInt(e.style.transform, 10)
     }));
 
     const data = { edges: edgeData, vertices: vertexData };
