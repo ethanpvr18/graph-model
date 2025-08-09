@@ -1,5 +1,5 @@
 // graph-state.js
-import { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, modifyEdgeLabel, createEditor, deleteEditor, saveGraph } from "./graph-functions.js";
+import { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, modifyEdgeLabel, createEditor, deleteEditor, saveGraph, loadGraph } from "./graph-functions.js";
 import "./graph-events.js";
 
 // Shared state variables
