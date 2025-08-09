@@ -244,22 +244,25 @@ function saveGraph(filename) {
 async function loadGraph() {
 
     const [fileHandle] = await window.showOpenFilePicker();
-    console.log(fileHandle);
     const file = await fileHandle.getFile();
-    console.log(file);
     const fileContent = await file.text();
-    console.log(fileContent);
     const graph = JSON.parse(fileContent);
-    console.log(graph);
 
     state.graph = graph;
 
     if(Array.isArray(state.graph.vertices)) {
-        state.graph.vertices.forEach(vertex => createVertex(vertex.label, vertex.left, vertex.top));
+        state.graph.vertices.forEach(v => createVertex(v.textContent, v.style.left, v.style.top));
     }
 
+    console.log(Array.isArray(state.graph.edges));
+    console.log(state.graph.edges);
+    console.log(state.graph.edges.v1);
+    
     if(Array.isArray(state.graph.edges)) {
-        state.graph.edges.forEach(edge => createEdge(edge.v1, edge.v2, edge.label));
+        state.graph.edges.forEach(e => createEdge(e.v1, e.v2, e.label));
         // state.graph.edges.forEach(edge => createEdge(state.vertices[edge.v1index], state.vertices[edge.v2index], edge.label));
     }
 }
+
+// state.graph.edges.push({ edge, label, v1, v2 });
+// state.graph.vertices.push({ vertex });
