@@ -47,9 +47,6 @@ function createVertex(label, left, top) {
 
     state.vertices.push(vertex);
 
-    if(!state.graph.vertices.vertex)
-        state.graph.vertices.push({ vertex });
-
     return vertex;
 }
 
@@ -261,11 +258,15 @@ async function loadGraph() {
     state.vertices = [];
     state.edges = [];
 
-    graph.vertices.forEach(v => {
-        state.vertices.push(createVertex(v.label, v.left, v.top));
-    });
+    if(Array.isArray(graph.vertices)) {
+        graph.vertices.forEach(v => {
+            state.vertices.push(createVertex(v.label, v.left, v.top));
+        });
+    }
 
-    graph.edges.forEach(e => { 
-        createEdge(state.vertices[e.v1Index], state.vertices[e.v2Index], e.label);
-    });
+    if(Array.isArray(graph.edges)) {
+        graph.edges.forEach(e => { 
+            createEdge(state.vertices[e.v1Index], state.vertices[e.v2Index], e.label);
+        });
+    }
 }
