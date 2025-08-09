@@ -236,8 +236,9 @@ async function loadGraph(filename) {
     const file = await fileHandle.getFile();
     const fileContent = await file.text();
 
-    const response = await fetch(filename);
-    const graph = await response.json();
+    const graph = JSON.parse(fileContent);
+
+    state.graph = graph;
 
     if(Array.isArray(state.graph.vertices)) {
         state.graph.vertices.forEach(vertex => createVertex(vertex.label, { clientX: vertex.left, clientY: vertex.top }));
