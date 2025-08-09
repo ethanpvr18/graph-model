@@ -230,7 +230,7 @@ function saveGraph(filename) {
     document.body.removeChild(a);
 }
 
-async function loadGraph(filename) {
+async function loadGraph() {
 
     const [fileHandle] = await window.showOpenFilePicker();
     const file = await fileHandle.getFile();

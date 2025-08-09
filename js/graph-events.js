@@ -155,7 +155,7 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
 
         // Load Graph - l
-        loadGraph('./saved/graph.json');
+        loadGraph();
     }
 });
 
