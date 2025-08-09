@@ -267,7 +267,7 @@ async function loadGraph(filename) {
     // graph.edges.forEach(createEdge(testVertex1, testVertex2, 1));
 
 
-    console.log(graph.vertices);
+    // console.log(graph.vertices);
 
     // let testVertex1 = createVertex(0, { clientX: 100, clientY: 100 });
     // let testVertex2 = createVertex(0, { clientX: 100, clientY: 200 });
