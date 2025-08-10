@@ -6,10 +6,10 @@ export { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge,
 function select(type, element) {
     if(type === 'vertex') {
         state.selectedVertex = element;
-        element.style.border = "3px solid red";
+        element.style?.border = "3px solid red";
     } else if(type === 'edge') {
         state.selectedEdge = element;
-        element.style.border = "3px solid red";
+        element.style?.border = "3px solid red";
     } else if(type === 'edge-label') {
         state.selectedEdgeLabel = element;
     }
@@ -19,10 +19,10 @@ function deselect(type, element) {
     if(element) {
         if(type === 'vertex') {
             state.selectedVertex = null;
-            element.style.border = "none";
+            element.style?.border = "none";
         } else if(type === 'edge') {
             state.selectedEdge = null;
-            element.style.border = "none";
+            element.style?.border = "none";
         }
     }
 }
@@ -31,7 +31,7 @@ function createVertex(label, left, top) {
     const vertex = document.createElement('div');
     vertex.classList.add('vertex');
     vertex.textContent = label;
-    vertex.style.border = "none";
+    vertex.style?.border = "none";
 
     const modelRect = model.getBoundingClientRect();
 
@@ -47,8 +47,8 @@ function createVertex(label, left, top) {
         else
             top = 0;
 
-    vertex.style.left = left + 'px';
-    vertex.style.top = top + 'px';
+    vertex.style?.left = left + 'px';
+    vertex.style?.top = top + 'px';
 
     model.appendChild(vertex);
 
@@ -79,7 +79,7 @@ function deleteVertex() {
 function modifyVertex() {
     if(model.contains(state.selectedVertex)) {
         state.selectedVertex.textContent = state.selectedEditor.value;
-        state.selectedVertex.style.border = 'none';
+        state.selectedVertex.style?.border = 'none';
     }
 
     state.selectedVertex = null;
@@ -124,25 +124,25 @@ function createEdge(v1, v2, edgeWeight, savedStyles) {
         const length = Math.sqrt(dx * dx + dy * dy);
         const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-        edge.style.left = `${x1}px`;
-        edge.style.top = `${y1}px`;
-        edge.style.width = `${length}px`;
-        edge.style.transform = `rotate(${angle}deg)`;
+        edge.style?.left = `${x1}px`;
+        edge.style?.top = `${y1}px`;
+        edge.style?.width = `${length}px`;
+        edge.style?.transform = `rotate(${angle}deg)`;
 
         const labelX = (x1 + x2) / 2;
         const labelY = (y1 + y2) / 2;
-        label.style.left = `${labelX + 5}px`;
-        label.style.top = `${labelY - 10}px`;        
+        label.style?.left = `${labelX + 5}px`;
+        label.style?.top = `${labelY - 10}px`;        
     };
 
     if(savedStyles) {
-        edge.style.left = savedStyles.left + 'px';
-        edge.style.top = savedStyles.top + 'px';
-        edge.style.width = savedStyles.width + 'px';
-        edge.style.transform = `rotate(${savedStyles.transform}deg)`;
+        edge.style?.left = savedStyles.left + 'px';
+        edge.style?.top = savedStyles.top + 'px';
+        edge.style?.width = savedStyles.width + 'px';
+        edge.style?.transform = `rotate(${savedStyles.transform}deg)`;
 
-        label.style.left = savedStyles.labelLeft + 'px';
-        label.style.top = savedStyles.labelTop + 'px';
+        label.style?.left = savedStyles.labelLeft + 'px';
+        label.style?.top = savedStyles.labelTop + 'px';
     } else {
         update();
     }
@@ -201,8 +201,8 @@ function createEditor(existingContent, leftPosition, topPosition) {
     state.selectedEditor.type = 'text';
     state.selectedEditor.classList.add('editor');
     state.selectedEditor.value = existingContent;
-    state.selectedEditor.style.left = leftPosition;
-    state.selectedEditor.style.top =  topPosition;
+    state.selectedEditor.style?.left = leftPosition;
+    state.selectedEditor.style?.top =  topPosition;
 
     state.selectedEditor.addEventListener('focus', () => {
         state.isEditing = true;
@@ -237,8 +237,8 @@ function deleteEditor() {
 async function saveGraph(filename) {
 
     const vertexData = state.vertices.map(v => ({
-        left: parseInt(v.style.left, 10) || 0,
-        top: parseInt(v.style.top, 10) || 0,
+        left: parseFloat(v.style?.left, 10) || 0,
+        top: parseFloat(v.style?.top, 10) || 0,
         label: v.textContent || "",
         border: 'none'
     }));
@@ -248,12 +248,12 @@ async function saveGraph(filename) {
         v2Index: state.vertices.indexOf(e.v2),
         label: e.label.textContent || "",
         border: 'none',
-        left: parseInt(e.edge.style.left, 10) || 0,
-        top: parseInt(e.edge.style.top, 10) || 0,
-        width: parseInt(e.edge.style.width, 10) || 0,
-        transform: parseFloat((e.edge.style.transform || "").replace(/[^\d.-]/g, "")) || 0,
-        labelLeft: parseInt(e.label.style.left, 10) || 0,
-        labelTop: parseInt(e.label.style.top, 10) || 0
+        left: parseFloat(e.edge.style?.left, 10) || 0,
+        top: parseFloat(e.edge.style?.top, 10) || 0,
+        width: parseFloat(e.edge.style?.width, 10) || 0,
+        transform: parseFloat((e.edge.style?.transform || "").replace(/[^\d.-]/g, "")) || 0,
+        labelLeft: parseFloat(e.label.style?.left, 10) || 0,
+        labelTop: parseFloat(e.label.style?.top, 10) || 0
     }));
 
     const data = { vertices: vertexData, edges: edgeData };
