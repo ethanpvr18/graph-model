@@ -237,20 +237,20 @@ function deleteEditor() {
 async function saveGraph(filename) {
 
     const vertexData = state.vertices.map(v => ({
-        left: parseInt(v.style.left, 10),
-        top: parseInt(v.style.top, 10),
-        label: v.textContent,
+        left: parseInt(v.vertex.style.left, 10) || 0,
+        top: parseInt(v.vertex.style.top, 10) || 0,
+        label: v.textContent || "",
         border: 'none'
     }));
 
     const edgeData = state.edges.filter(e => e && e.edge && e.label).map(e => ({
         v1Index: state.vertices.indexOf(e.v1),
         v2Index: state.vertices.indexOf(e.v2),
-        label: e.label.textContent,
+        label: e.label.textContent || "",
         border: 'none',
-        left: parseInt(e.style.left, 10) || 0,
-        top: parseInt(e.style.top, 10) || 0,
-        width: parseInt(e.style.width, 10) || 0,
+        left: parseInt(e.edge.style.left, 10) || 0,
+        top: parseInt(e.edge.style.top, 10) || 0,
+        width: parseInt(e.edge.style.width, 10) || 0,
         transform: parseFloat((e.edge.style.transform || "").replace(/[^\d.-]/g, "")) || 0,
         labelLeft: parseInt(e.label.style.left, 10) || 0,
         labelTop: parseInt(e.label.style.top, 10) || 0
