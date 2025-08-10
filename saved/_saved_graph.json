@@ -1,21 +1,27 @@
 {
   "vertices": [
     {
-      "left": 177,
-      "top": 245,
+      "left": 175,
+      "top": 143,
       "label": "v1",
       "border": "none"
     },
     {
-      "left": 403,
-      "top": 182,
+      "left": 462,
+      "top": 89,
       "label": "v2",
       "border": "none"
     },
     {
-      "left": 378,
-      "top": 450,
+      "left": 429,
+      "top": 290,
       "label": "v3",
+      "border": "none"
+    },
+    {
+      "left": 211,
+      "top": 464,
+      "label": "v4",
       "border": "none"
     }
   ],
@@ -25,36 +31,60 @@
       "v2Index": 1,
       "label": "2",
       "border": "none",
-      "left": 204,
-      "top": 272,
-      "width": 232.562,
-      "transform": -16.4869,
-      "labelLeft": 320.5,
-      "labelTop": 229
+      "left": 199,
+      "top": 167,
+      "width": 292.036,
+      "transform": -10.6558,
+      "labelLeft": 347.5,
+      "labelTop": 130
     },
     {
       "v1Index": 1,
       "v2Index": 2,
       "label": "7",
       "border": "none",
-      "left": 430,
-      "top": 209,
-      "width": 266.475,
-      "transform": 96.0315,
-      "labelLeft": 421,
-      "labelTop": 331.5
+      "left": 486,
+      "top": 113,
+      "width": 203.691,
+      "transform": 99.3236,
+      "labelLeft": 474.5,
+      "labelTop": 203.5
     },
     {
       "v1Index": 2,
       "v2Index": 0,
       "label": "1",
       "border": "none",
-      "left": 405,
-      "top": 477,
-      "width": 291.342,
-      "transform": -134.444,
-      "labelLeft": 308,
-      "labelTop": 363
+      "left": 453,
+      "top": 314,
+      "width": 293.471,
+      "transform": -149.94,
+      "labelLeft": 331,
+      "labelTop": 230.5
+    },
+    {
+      "v1Index": 2,
+      "v2Index": 3,
+      "label": "7",
+      "border": "none",
+      "left": 453,
+      "top": 314,
+      "width": 278.927,
+      "transform": 141.404,
+      "labelLeft": 349,
+      "labelTop": 391
+    },
+    {
+      "v1Index": 3,
+      "v2Index": 0,
+      "label": "9",
+      "border": "none",
+      "left": 238,
+      "top": 491,
+      "width": 326.339,
+      "transform": -96.8637,
+      "labelLeft": 223.5,
+      "labelTop": 319
     }
   ]
 }

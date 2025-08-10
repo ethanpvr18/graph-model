@@ -58,3 +58,9 @@
     padding: 4px;
     border: 1px solid black;
 }
+
+@media print {
+    * {
+        visibility: visible;
+    }
+}
