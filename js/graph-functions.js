@@ -37,15 +37,15 @@ function createVertex(label, left, top) {
 
     if(left == null)
         if(window.event)
-            left = window.event.clientX - modelRect.left - 24 + 'px';
+            left = window.event.clientX - modelRect.left - 24;
         else
-            left = 0 + 'px';
+            left = 0 ;
 
     if(top == null)
         if(window.event)
-            top = window.event.clientY - modelRect.top - 24 + 'px';
+            top = window.event.clientY - modelRect.top - 24;
         else
-            top = 0 + 'px';
+            top = 0;
 
     vertex.style.left = left + 'px';
     vertex.style.top = top + 'px';
@@ -87,7 +87,7 @@ function modifyVertex() {
     deleteEditor();
 }
 
-function createEdge(v1, v2, edgeWeight) {
+function createEdge(v1, v2, edgeWeight, savedStyles) {
     if(v1 && v2 && edgeWeight) {
         const edge = document.createElement('div');
         edge.classList.add('edge');
@@ -133,18 +133,25 @@ function createEdge(v1, v2, edgeWeight) {
             label.style.top = `${labelY - 10}px`;        
         };
 
-        update();
+        if(savedStyles) {
+            edge.style.left = savedStyles.left + 'px';
+            edge.style.top = savedStyles.top + 'px';
+            edge.style.width = savedStyles.width + 'px';
+            edge.style.transform = `rotate(${savedStyles.transform}deg)`;
+
+            label.style.left = savedStyles.labelLeft + 'px';
+            label.style.top = savedStyles.labelTop + 'px';
+        } else {
+            update();
+        }
 
         state.edges.push({ edge, label, v1, v2, update });
 
-        if(!state.graph)
-            state.graph = {};
+        // if(!state.graph)
+        //     state.graph = {};
 
-        if(!Array.isArray(state.graph.edges))
-            state.graph.edges = [];
-
-        if(!state.graph.edges.edge)
-            state.graph.edges.push({ edge, label, v1, v2 });
+        // if(!Array.isArray(state.graph.edges))
+        //     state.graph.edges = [];
 
         return edge;
     }
@@ -245,10 +252,12 @@ async function saveGraph(filename) {
         left: parseInt(e.style.left, 10),
         top: parseInt(e.style.top, 10),
         width: parseInt(e.style.width, 10),
-        transform: parseInt(e.style.transform, 10)
+        transform: parseFloat(e.edge.style.transform.replace(/[^\d.-]/g, "")),
+        labelLeft: parseInt(e.label.style.left, 10),
+        labelTop: parseInt(e.label.style.top, 10)
     }));
 
-    const data = { edges: edgeData, vertices: vertexData };
+    const data = { vertices: vertexData, edges: edgeData };
     const dataString = JSON.stringify(data, null, 2);
 
 
@@ -300,7 +309,14 @@ async function loadGraph() {
             const v1 = state.vertices[e.v1Index];
             const v2 = state.vertices[e.v2Index];
             if(v1 && v2)
-                createEdge(v1, v2, e.label);
+                createEdge(v1, v2, e.label, {
+                    left: e.left,
+                    top: e.top,
+                    width: e.width,
+                    transform: e.transform,
+                    labelLeft: e.labelLeft,
+                    labelTop: e.labelTop
+            });
         });
     }
 }
