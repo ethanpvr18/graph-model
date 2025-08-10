@@ -244,17 +244,17 @@ async function saveGraph(filename) {
         border: 'none'
     }));
 
-    const edgeData = state.edges.map(e => ({
+    const edgeData = state.edges.filter(e => e.edge && e.label).map(e => ({
         v1Index: state.vertices.indexOf(e.v1),
         v2Index: state.vertices.indexOf(e.v2),
         label: e.label.textContent,
         border: 'none',
-        left: parseInt(e.style.left, 10),
-        top: parseInt(e.style.top, 10),
-        width: parseInt(e.style.width, 10),
-        transform: parseFloat(e.edge.style.transform.replace(/[^\d.-]/g, "")),
-        labelLeft: parseInt(e.label.style.left, 10),
-        labelTop: parseInt(e.label.style.top, 10)
+        left: parseInt(e.style.left, 10) || 0,
+        top: parseInt(e.style.top, 10) || 0,
+        width: parseInt(e.style.width, 10) || 0,
+        transform: parseFloat((e.edge.style.transform || "").replace(/[^\d.-]/g, "")) || 0,
+        labelLeft: parseInt(e.label.style.left, 10) || 0,
+        labelTop: parseInt(e.label.style.top, 10) || 0
     }));
 
     const data = { vertices: vertexData, edges: edgeData };
