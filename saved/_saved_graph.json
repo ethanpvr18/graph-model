@@ -1,36 +1,23 @@
 {
-  "edges": [
-    {
-      "v1Index": 0,
-      "v2Index": 1,
-      "label": "5"
-    },
-    {
-      "v1Index": 1,
-      "v2Index": 2,
-      "label": "100"
-    },
-    {
-      "v1Index": 2,
-      "v2Index": 0,
-      "label": "10"
-    }
-  ],
   "vertices": [
     {
-      "left": 179,
-      "top": 172,
-      "label": "v1"
+      "left": 181,
+      "top": 193,
+      "label": "v1",
+      "border": "none"
     },
     {
-      "left": 330,
-      "top": 89,
-      "label": "v2"
+      "left": 285,
+      "top": 128,
+      "label": "v2",
+      "border": "none"
     },
     {
-      "left": 343,
-      "top": 333,
-      "label": "v3"
+      "left": 354,
+      "top": 295,
+      "label": "v3",
+      "border": "none"
     }
-  ]
+  ],
+  "edges": []
 }

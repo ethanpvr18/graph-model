@@ -88,99 +88,95 @@ function modifyVertex() {
 }
 
 function createEdge(v1, v2, edgeWeight, savedStyles) {
-    if(v1 && v2 && edgeWeight) {
-        const edge = document.createElement('div');
-        edge.classList.add('edge');
+    if(!v1 || !v2 || !edgeWeight)
+        return null;
 
-        const label = document.createElement('div');
-        label.textContent = edgeWeight;
-        label.classList.add('edge-label');
+    const edge = document.createElement('div');
+    edge.classList.add('edge');
 
-        label.addEventListener('focus', (event) => {
-            state.isEditing = true;
-        });
+    const label = document.createElement('div');
+    label.textContent = edgeWeight;
+    label.classList.add('edge-label');
 
-        label.addEventListener('blur', (event) => {
-            state.isEditing = false;
-        });
+    label.addEventListener('focus', (event) => {
+        state.isEditing = true;
+    });
 
-        model.appendChild(edge);
-        model.appendChild(label);
+    label.addEventListener('blur', (event) => {
+        state.isEditing = false;
+    });
 
-        const update = () => {
-            const modelRect = model.getBoundingClientRect();
-            const v1Rect = v1.getBoundingClientRect();
-            const v2Rect = v2.getBoundingClientRect();
+    model.appendChild(edge);
+    model.appendChild(label);
 
-            const x1 = v1Rect.left + v1Rect.width / 2 - modelRect.left;
-            const y1 = v1Rect.top + v1Rect.height / 2 - modelRect.top;
-            const x2 = v2Rect.left + v2Rect.width / 2 - modelRect.left;
-            const y2 = v2Rect.top + v2Rect.height / 2 - modelRect.top;
+    const update = () => {
+        const modelRect = model.getBoundingClientRect();
+        const v1Rect = v1.getBoundingClientRect();
+        const v2Rect = v2.getBoundingClientRect();
 
-            const dx = x2 - x1;
-            const dy = y2 - y1;
-            const length = Math.sqrt(dx * dx + dy * dy);
-            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        const x1 = v1Rect.left + v1Rect.width / 2 - modelRect.left;
+        const y1 = v1Rect.top + v1Rect.height / 2 - modelRect.top;
+        const x2 = v2Rect.left + v2Rect.width / 2 - modelRect.left;
+        const y2 = v2Rect.top + v2Rect.height / 2 - modelRect.top;
 
-            edge.style.left = `${x1}px`;
-            edge.style.top = `${y1}px`;
-            edge.style.width = `${length}px`;
-            edge.style.transform = `rotate(${angle}deg)`;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-            const labelX = (x1 + x2) / 2;
-            const labelY = (y1 + y2) / 2;
-            label.style.left = `${labelX + 5}px`;
-            label.style.top = `${labelY - 10}px`;        
-        };
+        edge.style.left = `${x1}px`;
+        edge.style.top = `${y1}px`;
+        edge.style.width = `${length}px`;
+        edge.style.transform = `rotate(${angle}deg)`;
 
-        if(savedStyles) {
-            edge.style.left = savedStyles.left + 'px';
-            edge.style.top = savedStyles.top + 'px';
-            edge.style.width = savedStyles.width + 'px';
-            edge.style.transform = `rotate(${savedStyles.transform}deg)`;
+        const labelX = (x1 + x2) / 2;
+        const labelY = (y1 + y2) / 2;
+        label.style.left = `${labelX + 5}px`;
+        label.style.top = `${labelY - 10}px`;        
+    };
 
-            label.style.left = savedStyles.labelLeft + 'px';
-            label.style.top = savedStyles.labelTop + 'px';
-        } else {
-            update();
-        }
+    if(savedStyles) {
+        edge.style.left = savedStyles.left + 'px';
+        edge.style.top = savedStyles.top + 'px';
+        edge.style.width = savedStyles.width + 'px';
+        edge.style.transform = `rotate(${savedStyles.transform}deg)`;
 
-        state.edges.push({ edge, label, v1, v2, update });
-
-        // if(!state.graph)
-        //     state.graph = {};
-
-        // if(!Array.isArray(state.graph.edges))
-        //     state.graph.edges = [];
-
-        return edge;
+        label.style.left = savedStyles.labelLeft + 'px';
+        label.style.top = savedStyles.labelTop + 'px';
+    } else {
+        update();
     }
+
+    state.edges.push({ edge, label, v1, v2, update });
+
+    return edge;
 }
 
 function deleteEdge() {
-    if(state.selectedEdge) {
-        const index = state.edges.findIndex(e => e.edge === state.selectedEdge);
-        if (index !== -1) {
-            const { edge, label } = state.edges[index];
+    if(!state.selectedEdge)
+        return;
 
-            if (model.contains(edge)) model.removeChild(edge);
-            if (model.contains(label)) model.removeChild(label);
-
-            state.edges.splice(index, 1);
+    state.edges = state.edges.filter(e => {
+        if (e && e.edge === state.selectedEdge) {
+            if (e.edge && model.contains(e.edge)) model.removeChild(e.edge);
+            if (e.label && model.contains(e.label)) model.removeChild(e.label);
+            
+            return false;
         }
+        return true;
+    });
 
-        state.selectedEdge = null;
-    }
+    state.selectedEdge = null;
 }
 
 function modifyEdge() {
-    if(state.selectedEdge) {
-        const edgeToModify = state.edges.find(e => e.edge === state.selectedEdge);
-        
-        if(edgeToModify) {
-            edgeToModify.label.textContent = state.selectedEditor.value;
-        }
-    }
+    if(!state.selectedEdge || !state.selectedEditor)
+        return null;
+    
+    const edgeToModify = state.edges.find(e => e.edge === state.selectedEdge);
+    
+    if(edgeToModify && edgeToModify.label)
+        edgeToModify.label.textContent = state.selectedEditor.value?.trim() || '';
 
     state.selectedEdge = null;
 
@@ -188,8 +184,11 @@ function modifyEdge() {
 }
 
 function modifyEdgeLabel() {
+    if(!state.selectedEdgeLabel || !state.selectedEditor)
+        return;
+
     if(model.contains(state.selectedEdgeLabel)) {
-        state.selectedEdgeLabel.textContent = state.selectedEditor.value;
+        state.selectedEdgeLabel.textContent = state.selectedEditor.value?.trim() || '';
     }
 
     state.selectedEdgeLabel = null;
@@ -244,7 +243,7 @@ async function saveGraph(filename) {
         border: 'none'
     }));
 
-    const edgeData = state.edges.filter(e => e.edge && e.label).map(e => ({
+    const edgeData = state.edges.filter(e => e && e.edge && e.label).map(e => ({
         v1Index: state.vertices.indexOf(e.v1),
         v2Index: state.vertices.indexOf(e.v2),
         label: e.label.textContent,
