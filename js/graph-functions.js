@@ -237,8 +237,8 @@ function deleteEditor() {
 async function saveGraph(filename) {
 
     const vertexData = state.vertices.map(v => ({
-        left: parseInt(v.vertex.style.left, 10) || 0,
-        top: parseInt(v.vertex.style.top, 10) || 0,
+        left: parseInt(v.style.left, 10) || 0,
+        top: parseInt(v.style.top, 10) || 0,
         label: v.textContent || "",
         border: 'none'
     }));
