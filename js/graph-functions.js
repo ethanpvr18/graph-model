@@ -23,6 +23,8 @@ function deselect(type, element) {
         } else if(type === 'edge') {
             state.selectedEdge = null;
             element.style.border = "none";
+        } else if(type === 'edge-label') {
+            state.selectedEdgeLabel = null;
         }
     }
 }
