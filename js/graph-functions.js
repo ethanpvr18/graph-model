@@ -299,22 +299,22 @@ async function loadGraph() {
 
     if(Array.isArray(graph.vertices)) {
         graph.vertices.forEach(v => {
-            state.vertices.push(createVertex(v.label, v.left, v.top));
+            createVertex(v?.label, v?.left, v?.top);
         });
     }
 
     if(Array.isArray(graph.edges)) {
         graph.edges.forEach(e => { 
-            const v1 = state.vertices[e.v1Index];
-            const v2 = state.vertices[e.v2Index];
+            const v1 = state?.vertices[e?.v1Index];
+            const v2 = state?.vertices[e?.v2Index];
             if(v1 && v2)
-                createEdge(v1, v2, e.label, {
-                    left: e.left,
-                    top: e.top,
-                    width: e.width,
-                    transform: e.transform,
-                    labelLeft: e.labelLeft,
-                    labelTop: e.labelTop
+                createEdge(v1, v2, e?.label, {
+                    left: e?.left,
+                    top: e?.top,
+                    width: e?.width,
+                    transform: e?.transform,
+                    labelLeft: e?.labelLeft,
+                    labelTop: e?.labelTop
             });
         });
     }
