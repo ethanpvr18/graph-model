@@ -319,3 +319,7 @@ async function loadGraph() {
         });
     }
 }
+
+async function closeGraph() {
+    model.removeChildren();
+}
