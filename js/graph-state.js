@@ -28,7 +28,7 @@ open.type = 'button';
 open.name = 'Open';
 open.value = 'Open';
 open.addEventListener('click', (event) => {
-    if(event.target.name.contains('Open')) {
+    if(event.target.name.includes('Open')) {
         console.log('Open');
     }
 });
@@ -40,7 +40,7 @@ close.type = 'button';
 close.name = 'Close';
 close.value = 'Close';
 close.addEventListener('click', (event) => {
-    if(event.target.name.contains('Close')) {
+    if(event.target.name.includes('Close')) {
         console.log('Close');
     }
 });
@@ -52,7 +52,7 @@ save.type = 'button';
 save.name = 'Save';
 save.value = 'Save';
 save.addEventListener('click', (event) => {
-    if(event.target.name.contains('Save')) {
+    if(event.target.name.includes('Save')) {
         console.log('Save');
     }
 });
@@ -64,7 +64,7 @@ saveAs.type = 'button';
 saveAs.name = 'Save As';
 saveAs.value = 'Save As';
 saveAs.addEventListener('click', (event) => {
-    if(event.target.name.contains('Save As')) {
+    if(event.target.name.includes('Save As')) {
         console.log('Save As');
     }
 });
@@ -76,7 +76,7 @@ print.type = 'button';
 print.name = 'Print';
 print.value = 'Print';
 print.addEventListener('click', (event) => {
-    if(event.target.name.contains('Print')) {
+    if(event.target.name.includes('Print')) {
         console.log('Print');
     }
 });
@@ -88,7 +88,7 @@ functions.type = 'button';
 functions.name = 'Functions';
 functions.value = 'Functions';
 functions.addEventListener('click', (event) => {
-    if(event.target.name.contains('Functions')) {
+    if(event.target.name.includes('Functions')) {
         console.log('Functions');
     }
 });
