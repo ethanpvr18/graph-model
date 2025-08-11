@@ -12,6 +12,12 @@ document.addEventListener('click', (event) => {
             deleteEditor();
         }
     }
+
+    console.log(state);
+    console.log(state.graph);
+    console.log(state.edges);
+    console.log(state.vertices);
+
 });
 
 document.addEventListener('dblclick', (event) => {

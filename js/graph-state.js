@@ -23,7 +23,7 @@ export const model = document.createElement('div');
 model.classList.add('model');
 document.body.appendChild(model);
 
-let open = document.createElement('input');
+export const open = document.createElement('input');
 open.type = 'button';
 open.name = 'Open';
 open.value = 'Open';
@@ -32,8 +32,9 @@ open.addEventListener('click', (event) => {
         console.log('Open');
     }
 });
+model.appendChild(open);
 
-let close = document.createElement('input');
+export const close = document.createElement('input');
 close.type = 'button';
 close.name = 'Close';
 close.value = 'Close';
@@ -42,8 +43,9 @@ close.addEventListener('click', (event) => {
         console.log('Close');
     }
 });
+model.appendChild(close);
 
-let save = document.createElement('input');
+export const save = document.createElement('input');
 save.type = 'button';
 save.name = 'Save';
 save.value = 'Save';
@@ -52,8 +54,9 @@ save.addEventListener('click', (event) => {
         console.log('Save');
     }
 });
+model.appendChild(save);
 
-let saveAs = document.createElement('input');
+export const saveAs = document.createElement('input');
 saveAs.type = 'button';
 saveAs.name = 'Save As';
 saveAs.value = 'Save As';
@@ -62,8 +65,9 @@ saveAs.addEventListener('click', (event) => {
         console.log('Save As');
     }
 });
+model.appendChild(saveAs);
 
-let print = document.createElement('input');
+export const print = document.createElement('input');
 print.type = 'button';
 print.name = 'Print';
 print.value = 'Print';
@@ -72,8 +76,9 @@ print.addEventListener('click', (event) => {
         console.log('Print');
     }
 });
+model.appendChild(print);
 
-let functions = document.createElement('input');
+export const functions = document.createElement('input');
 functions.type = 'button';
 functions.name = 'Functions';
 functions.value = 'Functions';
@@ -82,3 +87,4 @@ functions.addEventListener('click', (event) => {
         console.log('Functions');
     }
 });
+model.appendChild(functions);
