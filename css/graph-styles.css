@@ -60,7 +60,11 @@
 }
 
 @media print {
-    * {
+    .model .edge .edge-label .vertex  {
         visibility: visible;
+    }
+
+    .editor .open .close .save .save-as .print .functions {
+        visibility: hidden;
     }
 }

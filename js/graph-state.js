@@ -32,6 +32,7 @@ open.addEventListener('click', (event) => {
         console.log('Open');
     }
 });
+open.classList.add('open');
 model.appendChild(open);
 
 export const close = document.createElement('input');
@@ -43,6 +44,7 @@ close.addEventListener('click', (event) => {
         console.log('Close');
     }
 });
+close.classList.add('close');
 model.appendChild(close);
 
 export const save = document.createElement('input');
@@ -54,6 +56,7 @@ save.addEventListener('click', (event) => {
         console.log('Save');
     }
 });
+save.classList.add('save');
 model.appendChild(save);
 
 export const saveAs = document.createElement('input');
@@ -65,6 +68,7 @@ saveAs.addEventListener('click', (event) => {
         console.log('Save As');
     }
 });
+saveAs.classList.add('save-as');
 model.appendChild(saveAs);
 
 export const print = document.createElement('input');
@@ -76,6 +80,7 @@ print.addEventListener('click', (event) => {
         console.log('Print');
     }
 });
+print.classList.add('print');
 model.appendChild(print);
 
 export const functions = document.createElement('input');
@@ -87,4 +92,5 @@ functions.addEventListener('click', (event) => {
         console.log('Functions');
     }
 });
+functions.classList.add('functions');
 model.appendChild(functions);
