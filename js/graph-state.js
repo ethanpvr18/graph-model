@@ -1,5 +1,5 @@
 // graph-state.js
-import { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, modifyEdgeLabel, createEditor, deleteEditor, saveGraph, loadGraph } from "./graph-functions.js";
+import { select, deselect, createVertex, deleteVertex, modifyVertex, createEdge, deleteEdge, modifyEdge, modifyEdgeLabel, createEditor, deleteEditor, saveGraph, loadGraph, closeGraph } from "./graph-functions.js";
 import "./graph-events.js";
 
 // Shared state variables
@@ -29,7 +29,7 @@ open.name = 'Open';
 open.value = 'Open';
 open.addEventListener('click', (event) => {
     if(event.target.name.includes('Open')) {
-        console.log('Open');
+        loadGraph();
     }
 });
 open.classList.add('open');
@@ -41,7 +41,7 @@ close.name = 'Close';
 close.value = 'Close';
 close.addEventListener('click', (event) => {
     if(event.target.name.includes('Close')) {
-        console.log('Close');
+        closeGraph();
     }
 });
 close.classList.add('close');
@@ -53,7 +53,7 @@ save.name = 'Save';
 save.value = 'Save';
 save.addEventListener('click', (event) => {
     if(event.target.name.includes('Save')) {
-        console.log('Save');
+        saveGraph();
     }
 });
 save.classList.add('save');
@@ -65,7 +65,7 @@ saveAs.name = 'Save As';
 saveAs.value = 'Save As';
 saveAs.addEventListener('click', (event) => {
     if(event.target.name.includes('Save As')) {
-        console.log('Save As');
+        saveGraph();
     }
 });
 saveAs.classList.add('save-as');
@@ -77,7 +77,7 @@ print.name = 'Print';
 print.value = 'Print';
 print.addEventListener('click', (event) => {
     if(event.target.name.includes('Print')) {
-        console.log('Print');
+        window.print();
     }
 });
 print.classList.add('print');
