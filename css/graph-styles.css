@@ -60,11 +60,15 @@
 }
 
 @media print {
-    .model .edge .edge-label .vertex  {
+    .edge .edge-label .vertex  {
         visibility: visible;
+        background-color: black;
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     .editor .open .close .save .save-as .print .functions {
-        visibility: hidden;
+        display: none;
     }
 }
