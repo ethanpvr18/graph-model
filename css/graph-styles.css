@@ -60,7 +60,7 @@
 }
 
 @media print {
-    .edge .edge-label .vertex  {
+    .model .edge .edge-label .vertex  {
         visibility: visible;
         background-color: black;
         color: white;
