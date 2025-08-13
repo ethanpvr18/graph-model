@@ -13,10 +13,9 @@ document.addEventListener('click', (event) => {
         }
     }
 
-    console.log(state);
-    console.log(state.graph);
-    console.log(state.edges);
-    console.log(state.vertices);
+    console.log('V: ' + document.querySelectorAll('.vertex').length);
+    console.log('E: ' + document.querySelectorAll('.edge').length);
+    console.log('EL: ' + document.querySelectorAll('.edge-label').length);
 
 });
 
